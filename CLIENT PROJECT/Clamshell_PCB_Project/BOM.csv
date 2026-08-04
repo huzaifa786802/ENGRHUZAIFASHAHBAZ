@@ -1,0 +1,14 @@
+Designator,Quantity,Part Description,Suggested Part / Module,Notes
+U1,1,Main MCU Module - WiFi/BT + S3 MCU,ESP32-S3 WROOM module (Espressif),Module with integrated antenna simplifies RF
+LCD1,2,"2.4"" AMOLED display module (MIPI-DSI)","Vendor-specific MIPI-DSI AMOLED 2.4""",Select vendor with on-cell touch option and minimal bezel
+TP1,1,Touch controller (if not on-cell),Goodix GT911 or FT6236,I2C touch controller; use only if display not on-cell
+PMIC,1,USB-C PD-capable charger & power path,TI BQ25895,Handles PD input and battery charging
+CC_CTRL,1,USB-C CC controller,STUSB4500 (or minimal CC resistors),Use STUSB4500 if full PD is required
+BAT,1,Thin Li-Po battery (~1400 mAh),Manufacturer-specific thin pouch cell,Confirm exact thickness and dimensions
+FUSB,1,Battery fuel gauge (optional),TI BQ27441,I2C fuel gauge for accurate SOC
+USB_C,1,Low-profile USB-C receptacle,Type-C SMD receptacle (bottom/edge mount),Choose low-profile FPC-compatible footprint
+ANT_WIFI,1,WiFi/BT antenna,Ceramic or FPC WiFi antenna,Keepout area required near antenna
+BTGND,1,Antenna matching network (placeholder),L/C network,Value depends on antenna; tune at prototyping stage
+ACC,1,Accelerometer / Hall sensor for open/close,A3144 (hall) or small accelerometer,Hall sensor preferred for lid detection
+REG,1,3.3V regulator (if module needs external),Buck converter or LDO,May be on-module; check module datasheet
+SIMPL,-,Misc passive components,"Resistors, capacitors, ESD diodes, ferrite beads",Standard SMD packages (0402/0201)
