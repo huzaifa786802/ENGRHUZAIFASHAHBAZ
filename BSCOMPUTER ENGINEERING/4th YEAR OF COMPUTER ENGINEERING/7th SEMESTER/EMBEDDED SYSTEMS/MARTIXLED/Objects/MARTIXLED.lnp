@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\MARTIXLED.obj" 
+TO ".\Objects\MARTIXLED" 
+PRINT(".\Listings\MARTIXLED.m51") RAMSIZE(256) 

@@ -1,0 +1,68 @@
+A51 MACRO ASSEMBLER  MARTIXLED                                                            11/07/2024 09:30:00 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\MARTIXLED.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE MARTIXLED.a51 SET(SMALL) DEBUG PRINT(.\Listings\MARTIXLED.lst) OBJECT(.
+                      \Objects\MARTIXLED.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG     000H
+                       2     
+0000 C297              3     START:  CLR     P1.7
+0002 7840              4             MOV     R0,#64
+0004 75A0FF            5             MOV     P2,#0FFH
+0007 7480              6             MOV     A,#80H
+                       7     
+0009                   8     NEXT_COL:
+0009 F580              9             MOV     P0,A
+000B 1120             10             CALL    DELAY
+000D 03               11             RR      A
+000E D8F9             12             DJNZ    R0,NEXT_COL
+                      13     
+0010 7840             14             MOV     R0,#64
+0012 7580FF           15             MOV     P0,#0FFH
+0015 7480             16             MOV     A,#80H
+                      17     
+0017                  18     NEXT_ROW:
+0017 F5A0             19             MOV     P2,A
+0019 1120             20             CALL    DELAY
+001B 03               21             RR      A
+001C D8F9             22             DJNZ    R0,NEXT_ROW
+                      23     
+001E 80E0             24             JMP     START
+                      25     
+                      26     ;===========================================================
+                      27     ; DELAY 0.1S
+                      28     ;===========================================================
+                      29     
+0020 7EC8             30     DELAY:  MOV     R6,#200
+                      31     
+0022 7FF9             32     DL1:    MOV     R7,#249
+0024 DFFE             33             DJNZ    R7,$
+0026 DEFA             34             DJNZ    R6,DL1
+0028 22               35             RET
+                      36             END
+A51 MACRO ASSEMBLER  MARTIXLED                                                            11/07/2024 09:30:00 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0020H   A   
+DL1. . . . . . . .  C ADDR   0022H   A   
+NEXT_COL . . . . .  C ADDR   0009H   A   
+NEXT_ROW . . . . .  C ADDR   0017H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
