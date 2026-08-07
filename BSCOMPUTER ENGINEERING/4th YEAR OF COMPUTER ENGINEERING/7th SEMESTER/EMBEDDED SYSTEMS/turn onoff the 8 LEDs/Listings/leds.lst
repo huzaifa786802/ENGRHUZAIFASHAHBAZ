@@ -1,0 +1,56 @@
+A51 MACRO ASSEMBLER  LEDS                                                                 11/13/2024 22:49:44 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\leds.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE leds.a51 SET(SMALL) DEBUG PRINT(.\Listings\leds.lst) OBJECT(.\Objects\l
+                      eds.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H         ; Start at address 0
+0000 759000            2     MOV P1, #00H      ; Clear all LEDs initially (assuming LEDs are connected to Port 1)
+0003 7808              3     MOV R0, #08H      ; Counter for 8 LEDs
+                       4     
+0005                   5     MAIN: 
+0005 7401              6         MOV A, #01H   ; Initialize with leftmost LED (binary 00000001)
+0007 7908              7         MOV R1, #08H  ; Load the loop count for 8 LEDs
+                       8     
+0009                   9     LOOP:
+0009 F590             10         MOV P1, A     ; Output current LED state to Port 1
+000B 1112             11         ACALL DELAY   ; Delay for 0.1 seconds
+000D 23               12         RL A          ; Rotate left to shift the bit to the next LED
+000E D9F9             13         DJNZ R1, LOOP ; Decrement R1, repeat for 8 LEDs
+                      14     
+0010 80F3             15         SJMP MAIN     ; Jump back to start for continuous operation
+                      16     
+0012                  17     DELAY:            ; 0.1-second delay subroutine (approximate)
+0012 7AFA             18         MOV R2, #250
+0014                  19     DELAY_LOOP1:
+0014 7BFA             20         MOV R3, #250
+0016                  21     DELAY_LOOP2:
+0016 DBFE             22         DJNZ R3, DELAY_LOOP2
+0018 DAFA             23         DJNZ R2, DELAY_LOOP1
+001A 22               24         RET
+                      25     
+                      26     END
+A51 MACRO ASSEMBLER  LEDS                                                                 11/13/2024 22:49:44 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0012H   A   
+DELAY_LOOP1. . . .  C ADDR   0014H   A   
+DELAY_LOOP2. . . .  C ADDR   0016H   A   
+LOOP . . . . . . .  C ADDR   0009H   A   
+MAIN . . . . . . .  C ADDR   0005H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
