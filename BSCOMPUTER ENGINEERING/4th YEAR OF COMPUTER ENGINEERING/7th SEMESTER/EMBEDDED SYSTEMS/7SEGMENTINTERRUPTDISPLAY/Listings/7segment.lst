@@ -1,0 +1,51 @@
+A51 MACRO ASSEMBLER  7SEGMENT                                                             12/19/2024 10:15:44 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\7segment.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE 7segment.a51 SET(SMALL) DEBUG PRINT(.\Listings\7segment.lst) OBJECT(.\O
+                      bjects\7segment.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 000H      ; Reset vector
+0000 8003              2     JMP START      ; Jump to the START label
+0003                   3     ORG 0003H      ; Interrupt vector for external interrupt 0
+0003 8010              4     JMP INTO       ; Jump to INTO interrupt service routine
+0005                   5     START:
+0005 758130            6         MOV SP, #30H       ; Initialize stack pointer
+0008 7590FF            7         MOV P1, #0FFH      ; Set Port 1 as input (default value)
+000B 75A000            8         MOV P2, #0         ; Clear Port 2
+000E 75A881            9         MOV IE, #10000001B ; Enable external interrupt 0 (INT0) and global interrupts
+0011 C288             10         CLR IT0            ; Configure INT0 as level-triggered
+0013 80FE             11     JMP $                 ; Infinite loop
+0015                  12     INTO:
+0015 C2A8             13         CLR EX0            ; Clear external interrupt 0 flag
+0017 E590             14         MOV A, P1          ; Read Port 1
+0019 540F             15         ANL A, #0FH        ; Mask upper nibble (optional, modify as needed)
+001B F5A0             16         MOV P2, A          ; Output result to Port 2
+001D D2A8             17         SETB EX0           ; Re-enable external interrupt 0
+001F 32               18         RETI               ; Return from interrupt
+                      19     END
+A51 MACRO ASSEMBLER  7SEGMENT                                                             12/19/2024 10:15:44 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+INTO . . . . . . .  C ADDR   0015H   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+START. . . . . . .  C ADDR   0005H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
