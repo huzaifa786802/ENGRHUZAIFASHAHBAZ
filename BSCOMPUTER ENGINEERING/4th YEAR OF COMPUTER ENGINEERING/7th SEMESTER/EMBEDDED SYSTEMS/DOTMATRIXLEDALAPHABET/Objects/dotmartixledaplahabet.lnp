@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\dotmartixledaplahabet.obj" 
+TO ".\Objects\dotmartixledaplahabet" 
+PRINT(".\Listings\dotmartixledaplahabet.m51") RAMSIZE(256) 

@@ -1,0 +1,80 @@
+A51 MACRO ASSEMBLER  DOTMARTIXLEDAPLAHABET                                                11/13/2024 09:03:03 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\dotmartixledaplahabet.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE dotmartixledaplahabet.a51 SET(SMALL) DEBUG PRINT(.\Listings\dotmartixle
+                      daplahabet.lst) OBJECT(.\Objects\dotmartixledaplahabet.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H             ; Starting address
+                       2     ; Define each letter pattern for Dot Matrix (example 5x7 font for A, B, etc.)
+0000 7E09097E          3     LETTER_A: DB 0x7E, 0x09, 0x09, 0x7E, 0x00  ; A
+0004 00                      
+0005 7F494936          4     LETTER_B: DB 0x7F, 0x49, 0x49, 0x36, 0x00  ; B
+0009 00                      
+000A 3E414122          5     LETTER_C: DB 0x3E, 0x41, 0x41, 0x22, 0x00  ; C
+000E 00                      
+                       6     ; Add more letters as needed
+                       7     ; Main program
+000F                   8     MAIN: 
+000F 7800              9         MOV R0, #LETTER_A       ; Load letter A pattern
+0011 1123             10         CALL DISPLAY_LETTER
+0013 112C             11         CALL DELAY_500MS
+0015 7805             12         MOV R0, #LETTER_B       ; Load letter B pattern
+0017 1123             13         CALL DISPLAY_LETTER
+0019 112C             14         CALL DELAY_500MS
+001B 780A             15         MOV R0, #LETTER_C       ; Load letter C pattern
+001D 1123             16         CALL DISPLAY_LETTER
+001F 112C             17         CALL DELAY_500MS
+0021 80EC             18         SJMP MAIN               ; Loop back to display letters again
+                      19     ; Subroutine to display letter on Dot Matrix
+0023                  20     DISPLAY_LETTER:
+0023 7905             21         MOV R1, #5              ; 5 bytes per letter pattern
+0025                  22     DISP_LOOP:
+0025 E6               23         MOV A, @R0              ; Move pattern byte to accumulator
+0026 F590             24         MOV P1, A               ; Send to Dot Matrix connected to Port 1
+0028 08               25         INC R0                  ; Move to next byte in pattern
+0029 D9FA             26         DJNZ R1, DISP_LOOP      ; Repeat for all bytes in pattern
+002B 22               27         RET
+                      28     ; Subroutine for 0.5-second delay
+002C                  29     DELAY_500MS:
+002C 7A32             30         MOV R2, #50             ; 50 x 10 ms = 500 ms
+002E                  31     DELAY_LOOP:
+002E 1133             32         ACALL DELAY_10MS        ; Call 10 ms delay 50 times
+0030 DAFC             33         DJNZ R2, DELAY_LOOP
+0032 22               34         RET
+                      35     ; Subroutine for 10 ms delay
+0033                  36     DELAY_10MS:
+0033 7BC8             37         MOV R3, #200            ; Adjust as needed for 10 ms
+0035                  38     DELAY_10MS_LOOP:
+0035 00               39         NOP                     ; No operation (wastes time)
+0036 DBFD             40         DJNZ R3, DELAY_10MS_LOOP
+0038 22               41         RET
+                      42     END                         ; End of program
+A51 MACRO ASSEMBLER  DOTMARTIXLEDAPLAHABET                                                11/13/2024 09:03:03 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY_10MS . . . .  C ADDR   0033H   A   
+DELAY_10MS_LOOP. .  C ADDR   0035H   A   
+DELAY_500MS. . . .  C ADDR   002CH   A   
+DELAY_LOOP . . . .  C ADDR   002EH   A   
+DISPLAY_LETTER . .  C ADDR   0023H   A   
+DISP_LOOP. . . . .  C ADDR   0025H   A   
+LETTER_A . . . . .  C ADDR   0000H   A   
+LETTER_B . . . . .  C ADDR   0005H   A   
+LETTER_C . . . . .  C ADDR   000AH   A   
+MAIN . . . . . . .  C ADDR   000FH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
