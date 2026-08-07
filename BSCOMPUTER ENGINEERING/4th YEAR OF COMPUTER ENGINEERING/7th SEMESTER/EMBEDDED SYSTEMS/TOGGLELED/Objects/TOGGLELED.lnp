@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\TOGGLELED.obj" 
+TO ".\Objects\TOGGLELED" 
+PRINT(".\Listings\TOGGLELED.m51") RAMSIZE(256) 

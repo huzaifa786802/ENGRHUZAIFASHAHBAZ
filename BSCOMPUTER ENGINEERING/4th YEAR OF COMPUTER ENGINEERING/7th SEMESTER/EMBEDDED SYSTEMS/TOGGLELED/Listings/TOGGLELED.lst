@@ -1,0 +1,47 @@
+A51 MACRO ASSEMBLER  TOGGLELED                                                            11/13/2024 23:17:58 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\TOGGLELED.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE TOGGLELED.a51 SET(SMALL) DEBUG PRINT(.\Listings\TOGGLELED.lst) OBJECT(.
+                      \Objects\TOGGLELED.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; Program to toggle between even and odd LEDs on an 8051 microcontroller
+                       2     ; using Keil Assembly Language
+0000                   3     ORG 0000H          ; Origin, start of the program
+0000                   4     START:          ; Start label
+0000 759000            5         MOV P1, #0  ; Initialize Port 1 to 0 (all LEDs off)
+0003                   6     MAIN_LOOP:      ; Main loop label
+0003 E590              7         MOV A, P1   ; Move current state of Port 1 to Accumulator A
+0005 F4                8         CPL A       ; Complement the accumulator (toggle the state)
+0006 F590              9         MOV P1, A   ; Output the toggled state back to Port 1
+0008 110C             10         ACALL DELAY ; Call delay subroutine
+000A 80F7             11         SJMP MAIN_LOOP ; Jump back to main loop
+000C                  12     DELAY:          ; Delay subroutine
+000C 7814             13         MOV R0, #20 ; Load R0 with a value for delay
+000E                  14     DELAY_LOOP:     
+000E 00               15         NOP          ; No operation (do nothing)
+000F D8FD             16         DJNZ R0, DELAY_LOOP ; Decrement R0 and repeat if not zero
+0011 22               17         RET          ; Return from subroutine
+                      18     END             ; End of program
+A51 MACRO ASSEMBLER  TOGGLELED                                                            11/13/2024 23:17:58 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   000CH   A   
+DELAY_LOOP . . . .  C ADDR   000EH   A   
+MAIN_LOOP. . . . .  C ADDR   0003H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
