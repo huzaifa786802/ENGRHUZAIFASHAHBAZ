@@ -1,0 +1,85 @@
+A51 MACRO ASSEMBLER  LEDBAR                                                               12/25/2024 23:42:03 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\LEDBAR.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LEDBAR.a51 SET(SMALL) DEBUG PRINT(.\Listings\LEDBAR.lst) OBJECT(.\Objec
+                      ts\LEDBAR.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 020030            2     LJMP MAIN
+0030                   3     ORG 0030H
+0030                   4     MAIN:
+0030 7590FF            5         MOV P1, #0FFH      ; Configure P1 as input for buttons
+0033 75A000            6         MOV P2, #00H       ; Configure P2 as output for LED bar
+0036                   7     CHECK_BUTTONS:
+0036 E590              8         MOV A, P1          ; Read button states
+                       9         ; Check if button 0 is pressed (active low)
+0038 309005           10         JNB P1.0, LEFT_TO_RIGHT
+                      11         ; Check if button 1 is pressed (active low)
+003B 30911B           12         JNB P1.1, RIGHT_TO_LEFT
+003E 80F6             13         SJMP CHECK_BUTTONS
+0040                  14     LEFT_TO_RIGHT:
+0040 7808             15         MOV R0, #8         ; Counter for 8 LEDs
+0042 7980             16         MOV R1, #80H       ; Start with leftmost LED (10000000B)
+0044                  17     L2R_LOOP:
+0044 89A0             18         MOV P2, R1         ; Output pattern to LED bar
+0046 120072           19         LCALL DELAY        ; Add delay
+0049 E9               20         MOV A, R1          ; Move current pattern to accumulator
+004A 03               21         RR A               ; Rotate right
+004B F9               22         MOV R1, A          ; Store back to R1
+004C D8F6             23         DJNZ R0, L2R_LOOP  ; Repeat until all LEDs are lit
+004E 75A0FF           24         MOV P2, #0FFH      ; Turn on all LEDs
+0051 120072           25         LCALL DELAY
+0054 75A000           26         MOV P2, #00H       ; Turn off all LEDs
+0057 80DD             27         SJMP CHECK_BUTTONS
+0059                  28     RIGHT_TO_LEFT:
+0059 7808             29         MOV R0, #8         ; Counter for 8 LEDs
+005B 7901             30         MOV R1, #01H       ; Start with rightmost LED (00000001B)
+005D                  31     R2L_LOOP:
+005D 89A0             32         MOV P2, R1         ; Output pattern to LED bar
+005F 120072           33         LCALL DELAY        ; Add delay
+0062 E9               34         MOV A, R1          ; Move current pattern to accumulator
+0063 23               35         RL A               ; Rotate left
+0064 F9               36         MOV R1, A          ; Store back to R1
+0065 D8F6             37         DJNZ R0, R2L_LOOP  ; Repeat until all LEDs are lit
+0067 75A0FF           38         MOV P2, #0FFH      ; Turn on all LEDs
+006A 120072           39         LCALL DELAY
+006D 75A000           40         MOV P2, #00H       ; Turn off all LEDs
+0070 80C4             41         SJMP CHECK_BUTTONS
+0072                  42     DELAY:                 ; Delay subroutine
+0072 7E05             43         MOV R6, #5
+0074                  44     DELAY_OUTER:
+0074 7FC8             45         MOV R7, #200
+0076                  46     DELAY_INNER:
+0076 DFFE             47         DJNZ R7, DELAY_INNER
+0078 DEFA             48         DJNZ R6, DELAY_OUTER
+007A 22               49         RET
+                      50     END
+A51 MACRO ASSEMBLER  LEDBAR                                                               12/25/2024 23:42:03 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CHECK_BUTTONS. . .  C ADDR   0036H   A   
+DELAY. . . . . . .  C ADDR   0072H   A   
+DELAY_INNER. . . .  C ADDR   0076H   A   
+DELAY_OUTER. . . .  C ADDR   0074H   A   
+L2R_LOOP . . . . .  C ADDR   0044H   A   
+LEFT_TO_RIGHT. . .  C ADDR   0040H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+R2L_LOOP . . . . .  C ADDR   005DH   A   
+RIGHT_TO_LEFT. . .  C ADDR   0059H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
