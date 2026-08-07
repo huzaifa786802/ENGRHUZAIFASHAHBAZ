@@ -1,0 +1,171 @@
+C51 COMPILER V9.60.0.0   DIGITALCLOCK                                                      01/09/2025 09:53:07 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE DIGITALCLOCK
+OBJECT MODULE PLACED IN .\Objects\digitalclock.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE digitalclock.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listi
+                    -ngs\digitalclock.lst) TABS(2) OBJECT(.\Objects\digitalclock.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <string.h>
+   3          // LCD pin definitions
+   4          sbit RS = P2^0;
+   5          sbit EN = P2^1;
+   6          sbit KEY1 = P1^0;  // Start/Resume key
+   7          sbit KEY2 = P1^1;  // Pause/Reset key
+   8          // Global variables for time
+   9          unsigned char seconds = 0;
+  10          unsigned char minutes = 0;
+  11          unsigned char hours = 0;
+  12          unsigned char running = 0;
+  13          unsigned int ms_count = 0;
+  14          // Function prototypes
+  15          void init_timer0(void);
+  16          void delay_ms(unsigned int ms);
+  17          void lcd_cmd(unsigned char cmd);
+  18          void lcd_data(unsigned char dat);
+  19          void lcd_init(void);
+  20          void lcd_string(unsigned char *str);
+  21          void update_display(void);
+  22          void check_keys(void);
+  23          // Timer0 ISR
+  24          void timer0_isr(void) interrupt 1 {
+  25   1          TH0 = 0xFC;   // Reload timer for 1ms delay
+  26   1          TL0 = 0x66;   
+  27   1          ms_count++;
+  28   1          if(ms_count >= 1000 && running) {  // 1 second has passed
+  29   2              ms_count = 0;
+  30   2              seconds++;
+  31   2              if(seconds >= 60) {
+  32   3                  seconds = 0;
+  33   3                  minutes++;
+  34   3                  if(minutes >= 60) {
+  35   4                      minutes = 0;
+  36   4                      hours++;
+  37   4                      if(hours >= 24) {
+  38   5                          hours = 0;
+  39   5                      }
+  40   4                  }
+  41   3              }
+  42   2              update_display();
+  43   2          }
+  44   1      }
+  45          // Initialize Timer0
+  46          void init_timer0(void) {
+  47   1          TMOD = 0x01;    // Timer0 in mode 1 (16-bit)
+  48   1          TH0 = 0xFC;     // Initial values for 1ms delay
+  49   1          TL0 = 0x66;
+  50   1          ET0 = 1;        // Enable Timer0 interrupt
+  51   1          EA = 1;         // Enable global interrupts
+  52   1          TR0 = 1;        // Start Timer0
+  53   1      }
+  54          // Millisecond delay function
+C51 COMPILER V9.60.0.0   DIGITALCLOCK                                                      01/09/2025 09:53:07 PAGE 2   
+
+  55          void delay_ms(unsigned int ms) {
+  56   1          unsigned int i;
+  57   1          for(i = 0; i < ms; i++) {
+  58   2              TH0 = 0xFC;   // 1ms delay values
+  59   2              TL0 = 0x66;
+  60   2              TR0 = 1;
+  61   2              while(!TF0);
+  62   2              TR0 = 0;
+  63   2              TF0 = 0;
+  64   2          }
+  65   1      }
+  66          // LCD functions
+  67          void lcd_cmd(unsigned char cmd) {
+  68   1          P0 = cmd;
+  69   1          RS = 0;
+  70   1          EN = 1;
+  71   1          delay_ms(5);
+  72   1          EN = 0;
+  73   1      }
+  74          void lcd_data(unsigned char dat) {
+  75   1          P0 = dat;
+  76   1          RS = 1;
+  77   1          EN = 1;
+  78   1          delay_ms(5);
+  79   1          EN = 0;
+  80   1      }
+  81          void lcd_init(void) {
+  82   1          lcd_cmd(0x38);    // 2 lines, 5x7 matrix
+  83   1          lcd_cmd(0x0C);    // Display ON, cursor OFF
+  84   1          lcd_cmd(0x01);    // Clear display
+  85   1          lcd_cmd(0x80);    // Move cursor to beginning of first line
+  86   1      }
+  87          void lcd_string(unsigned char *str) {
+  88   1          while(*str) {
+  89   2              lcd_data(*str++);
+  90   2          }
+  91   1      }
+  92          // Update LCD display
+  93          void update_display(void) {
+  94   1          unsigned char time_str[9];
+  95   1          lcd_cmd(0x85);    // Position cursor at center of first line
+  96   1          // Format time string
+  97   1          time_str[0] = (hours/10) + '0';
+  98   1          time_str[1] = (hours%10) + '0';
+  99   1          time_str[2] = ':';
+ 100   1          time_str[3] = (minutes/10) + '0';
+ 101   1          time_str[4] = (minutes%10) + '0';
+ 102   1          time_str[5] = ':';
+ 103   1          time_str[6] = (seconds/10) + '0';
+ 104   1          time_str[7] = (seconds%10) + '0';
+ 105   1          time_str[8] = '\0';   
+ 106   1          lcd_string(time_str);
+ 107   1      }
+ 108          // Check key inputs
+ 109          void check_keys(void) {
+ 110   1          if(!KEY1) {           // Start/Resume
+ 111   2              delay_ms(20);     // Debounce
+ 112   2              if(!KEY1) {
+ 113   3                  running = 1;
+ 114   3                  while(!KEY1);  // Wait for key release
+ 115   3              }
+ 116   2          }   
+C51 COMPILER V9.60.0.0   DIGITALCLOCK                                                      01/09/2025 09:53:07 PAGE 3   
+
+ 117   1          if(!KEY2) {           // Pause/Reset
+ 118   2              delay_ms(20);     // Debounce
+ 119   2              if(!KEY2) {
+ 120   3                  if(running) {  // If running, pause first
+ 121   4                      running = 0;
+ 122   4                  } else {      // If already paused, reset
+ 123   4                      hours = 0;
+ 124   4                      minutes = 0;
+ 125   4                      seconds = 0;
+ 126   4                      update_display();
+ 127   4                  }
+ 128   3                  while(!KEY2);  // Wait for key release
+ 129   3              }
+ 130   2          }
+ 131   1      }
+ 132          // Main function
+ 133          void main(void) {
+ 134   1          // Initialize LCD and Timer
+ 135   1          lcd_init();
+ 136   1          init_timer0();
+ 137   1          // Display initial time
+ 138   1          update_display();  
+ 139   1          // Main loop
+ 140   1          while(1) {
+ 141   2              check_keys();
+ 142   2          }
+ 143   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    426    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
