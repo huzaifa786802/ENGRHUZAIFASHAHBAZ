@@ -1,0 +1,1 @@
+"stepmotor.a51" SET (SMALL) DEBUG PRINT(.\Listings\stepmotor.lst) OBJECT(.\Objects\stepmotor.obj) EP

@@ -1,0 +1,57 @@
+A51 MACRO ASSEMBLER  STEPMOTOR                                                            12/13/2024 12:25:45 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\stepmotor.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE stepmotor.a51 SET(SMALL) DEBUG PRINT(.\Listings\stepmotor.lst) OBJECT(.
+                      \Objects\stepmotor.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H       ; Starting address of the program
+0000                   2     MAIN:
+0000 74FE              3         MOV A, #0FEH    ; Initialize accumulator with 1111 1110 (binary)
+0002 F590              4         MOV P1, A       ; Send initial value to Port 1 (LEDs)
+0004                   5     LOOP:
+0004 110D              6         ACALL DELAY     ; Call delay subroutine
+0006 1116              7         ACALL DELAY_5US ; Call 5-microsecond delay
+0008 03                8         RR A            ; Rotate accumulator right
+0009 F590              9         MOV P1, A       ; Update Port 1 with the rotated value
+000B 80F7             10         SJMP LOOP       ; Repeat the loop
+                      11     ; Delay subroutine to create a visible effect of rotation
+000D                  12     DELAY:
+000D 78C8             13         MOV R0, #200    ; Outer loop count
+000F 79FF             14     D1: MOV R1, #255    ; Inner loop count
+0011 D9FE             15     D2: DJNZ R1, D2     ; Decrement R1 until it reaches 0
+0013 D8FA             16         DJNZ R0, D1     ; Decrement R0 until it reaches 0
+0015 22               17         RET             ; Return from subroutine
+                      18     ; Subroutine for 5 microsecond delay (approximation based on 8051 clock cycle)
+0016                  19     DELAY_5US:
+0016 00               20         NOP             ; 1 machine cycle (1 microsecond for 12 MHz clock)
+0017 00               21         NOP             ; 1 machine cycle
+0018 00               22         NOP             ; 1 machine cycle
+0019 00               23         NOP             ; 1 machine cycle
+001A 00               24         NOP             ; 1 machine cycle
+001B 22               25         RET             ; Return from subroutine
+                      26     END
+A51 MACRO ASSEMBLER  STEPMOTOR                                                            12/13/2024 12:25:45 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D1 . . . . . . . .  C ADDR   000FH   A   
+D2 . . . . . . . .  C ADDR   0011H   A   
+DELAY. . . . . . .  C ADDR   000DH   A   
+DELAY_5US. . . . .  C ADDR   0016H   A   
+LOOP . . . . . . .  C ADDR   0004H   A   
+MAIN . . . . . . .  C ADDR   0000H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
