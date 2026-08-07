@@ -1,0 +1,88 @@
+A51 MACRO ASSEMBLER  DOTMATRIXLED_APLAHABET                                               11/07/2024 10:58:38 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+NO OBJECT MODULE REQUESTED
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE DOTMATRIXLED APLAHABET.a51 SET(SMALL) DEBUG PRINT(.\Listings\DOTMATRIXL
+                      ED APLAHABET.lst) OBJECT(.\Objects\DOTMATRIXLED APLAHABET.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; 8051 Assembly program to display the letter 'A' on an 8x8 Dot Matrix LED
+                       2     
+0000                   3     ORG 0000H
+                       4     
+                       5     ; Define the fixed pattern for the letter 'A'
+                       6     ; Each byte represents a row in the 8x8 LED matrix
+0000 3C66667E          7     PATTERN: DB 3CH, 66H, 66H, 7EH, 66H, 66H, 66H, 00H
+0004 66666600                
+                       8     
+                       9     ; Row selection table to activate each row one at a time
+0008 FEFDFBF7         10     ROW_SELECT: DB 0FEH, 0FDH, 0FBH, 0F7H, 0EFH, 0DFH, 0BFH, 0FFH
+000C EFDFBFFF                
+                      11     
+                      12     ; Initialize Ports
+0010 900000           13     MOV DPTR, #PATTERN   ; Load the pattern address for 'A'
+0013 7580FF           14     MOV P0, #0FFH        ; Clear Port 0 (connected to columns)
+0016 75A0FF           15     MOV P2, #0FFH        ; Clear Port 2 (connected to rows)
+                      16     
+0019                  17     MAIN_LOOP:
+0019 7808             18         MOV R0, #08      ; Loop counter for 8 rows
+                      19     
+001B                  20     DISPLAY_LOOP:
+001B E0               21         MOVX A, @DPTR    ; Load row data from pattern
+001C F5A0             22         MOV P2, A        ; Output row data to Port 2 (74LS245 for rows)
+                      23     
+001E E8               24         MOV A, R0
+001F 14               25         DEC A            ; Convert R0 to match row index (0-7)
+0020                  26         MOVC A, @A+ROW_SELECT ; Get row selection value from ROW_SELECT
+*** _____________________________________^
+*** ______________________________________^
+*** _______________________________________^
+*** ________________________________________^
+*** ERROR #A9 IN 26 (DOTMATRIXLED APLAHABET.a51, LINE 26): SYNTAX ERROR
+*** ERROR #A9 IN 26 (DOTMATRIXLED APLAHABET.a51, LINE 26): SYNTAX ERROR
+*** ERROR #A9 IN 26 (DOTMATRIXLED APLAHABET.a51, LINE 26): SYNTAX ERROR
+*** ERROR #A4 IN 26 (DOTMATRIXLED APLAHABET.a51, LINE 26): BAD INDIRECT REGISTER
+0020 F580             27         MOV P0, A        ; Output to Port 0 (ULN2803 for columns)
+                      28     
+0022 112C             29         ACALL DELAY      ; Call delay for stable display
+                      30     
+0024 A3               31         INC DPTR         ; Move to next row in the pattern
+0025 D8F4             32         DJNZ R0, DISPLAY_LOOP ; Repeat for all rows
+                      33     
+0027 900000           34         MOV DPTR, #PATTERN ; Reset DPTR to start of pattern
+002A 80ED             35         SJMP MAIN_LOOP     ; Repeat the main loop indefinitely
+                      36     
+                      37     ; Simple delay subroutine
+002C                  38     DELAY:
+002C 79FF             39         MOV R1, #0FFH
+002E 7AFF             40         MOV R2, #0FFH
+0030                  41     DELAY_LOOP:
+0030 DAFE             42         DJNZ R2, DELAY_LOOP
+0032 D9FC             43         DJNZ R1, DELAY_LOOP
+0034 22               44         RET
+                      45     
+                      46     END
+A51 MACRO ASSEMBLER  DOTMATRIXLED_APLAHABET                                               11/07/2024 10:58:38 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   002CH   A   
+DELAY_LOOP . . . .  C ADDR   0030H   A   
+DISPLAY_LOOP . . .  C ADDR   001BH   A   
+MAIN_LOOP. . . . .  C ADDR   0019H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PATTERN. . . . . .  C ADDR   0000H   A   
+ROW_SELECT . . . .  C ADDR   0008H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 4 ERROR(S)

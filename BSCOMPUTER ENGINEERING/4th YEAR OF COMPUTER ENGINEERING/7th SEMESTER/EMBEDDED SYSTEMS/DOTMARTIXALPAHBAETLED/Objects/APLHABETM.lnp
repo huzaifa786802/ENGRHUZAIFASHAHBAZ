@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\ALPHABETM.obj" 
+TO ".\Objects\APLHABETM" 
+PRINT(".\Listings\APLHABETM.m51") RAMSIZE(256) 

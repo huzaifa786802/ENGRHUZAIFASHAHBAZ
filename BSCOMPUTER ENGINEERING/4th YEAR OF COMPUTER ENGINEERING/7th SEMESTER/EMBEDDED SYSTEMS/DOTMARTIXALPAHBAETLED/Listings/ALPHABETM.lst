@@ -1,0 +1,79 @@
+A51 MACRO ASSEMBLER  ALPHABETM                                                            01/30/2025 09:28:05 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\ALPHABETM.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ALPHABETM.a51 SET(SMALL) DEBUG PRINT(.\Listings\ALPHABETM.lst) OBJECT(.
+                      \Objects\ALPHABETM.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 000H
+0000 8002              2     SJMP START       ; Jump to start to avoid executing data
+                       3     
+0002 C297              4     CLR P1.7         ; Clear P1.7 (optional)
+                       5     
+0004                   6     START:
+0004 900025            7         MOV DPTR,#TABLE   ; Load address of the table
+0007 7A01              8         MOV R2,#00000001B ; Start column selection from the first column (LSB)
+0009 7900              9         MOV R1,#0         ; Initialize row counter
+                      10     
+000B                  11     NEXT:
+000B E9               12         MOV A,R1
+000C 93               13         MOVC A,@A+DPTR    ; Fetch row pattern from TABLE
+000D F5A0             14         MOV P2,A          ; Send row pattern to P2 (row control)
+000F EA               15         MOV A,R2
+0010 F580             16         MOV P0,A          ; Send column selection to P0
+0012 111C             17         CALL DELAY        ; Call delay to keep it visible
+0014 23               18         RL A              ; Rotate left to shift column to the next
+0015 FA               19         MOV R2,A          ; Update column position
+0016 09               20         INC R1            ; Move to the next row
+0017 B907F1           21         CJNE R1,#7,NEXT   ; Loop through all 7 rows
+                      22     
+001A 80E8             23         JMP START         ; Restart displaying
+                      24     
+                      25     ;==============================
+                      26     ; DELAY 5mS
+                      27     ;==============================
+001C                  28     DELAY:
+001C 7E0A             29         MOV R6,#10
+001E                  30     DL1:
+001E 7FF9             31         MOV R7,#249
+0020 DFFE             32         DJNZ R7,$
+0022 DEFA             33         DJNZ R6,DL1
+0024 22               34         RET
+                      35     
+                      36     ;==============================
+0025                  37     TABLE: 
+0025 7E               38         DB 01111110B   ; Row 1
+0026 42               39         DB 01000010B   ; Row 2
+0027 76               40         DB 01110110B   ; Row 3
+0028 56               41         DB 01010110B   ; Row 4
+0029 56               42         DB 01010110B   ; Row 5
+002A 42               43         DB 01000010B   ; Row 6
+002B 42               44         DB 01000010B   ; Row 7
+                      45     ;==============================
+                      46     
+                      47     END  ; End directive
+A51 MACRO ASSEMBLER  ALPHABETM                                                            01/30/2025 09:28:05 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   001CH   A   
+DL1. . . . . . . .  C ADDR   001EH   A   
+NEXT . . . . . . .  C ADDR   000BH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0004H   A   
+TABLE. . . . . . .  C ADDR   0025H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
