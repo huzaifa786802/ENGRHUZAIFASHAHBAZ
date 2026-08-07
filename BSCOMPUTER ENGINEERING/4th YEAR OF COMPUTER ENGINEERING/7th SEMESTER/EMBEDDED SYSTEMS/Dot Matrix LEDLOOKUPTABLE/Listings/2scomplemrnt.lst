@@ -1,0 +1,105 @@
+A51 MACRO ASSEMBLER  2SCOMPLEMRNT                                                         01/30/2025 09:46:25 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\2scomplemrnt.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE 2scomplemrnt.a51 SET(SMALL) DEBUG PRINT(.\Listings\2scomplemrnt.lst) OB
+                      JECT(.\Objects\2scomplemrnt.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;perform experiment by writing a program using a lookup table that reads an 8-bit number fr
+                             om port 1,compute its 2's comple,ment using a lookup table and output the result to por2 in 8051 keil  assembly
+0000                   2     ORG 0000H
+0000 90000A            3         MOV DPTR, #LOOKUP_TABLE  ; Load the address of the lookup table into DPTR
+0003                   4     MAIN:
+0003 E590              5         MOV A, P1                 ; Read the 8-bit number from Port 1
+0005 93                6         MOVC A, @A+DPTR           ; Use the lookup table to get the 2's complement
+0006 F5A0              7         MOV P2, A                 ; Output the result to Port 2
+0008 80F9              8         SJMP MAIN                 ; Repeat continuously
+000A                   9     LOOKUP_TABLE:
+000A 00FFFEFD         10         DB  00H, 0FFH, 0FEH, 0FDH, 0FCH, 0FBH, 0FAH, 0F9H
+000E FCFBFAF9                
+0012 F8F7F6F5         11         DB  0F8H, 0F7H, 0F6H, 0F5H, 0F4H, 0F3H, 0F2H, 0F1H
+0016 F4F3F2F1                
+001A F0EFEEED         12         DB  0F0H, 0EFH, 0EEH, 0EDH, 0ECH, 0EBH, 0EAH, 0E9H
+001E ECEBEAE9                
+0022 E8E7E6E5         13         DB  0E8H, 0E7H, 0E6H, 0E5H, 0E4H, 0E3H, 0E2H, 0E1H
+0026 E4E3E2E1                
+002A E0DFDEDD         14         DB  0E0H, 0DFH, 0DEH, 0DDH, 0DCH, 0DBH, 0DAH, 0D9H
+002E DCDBDAD9                
+0032 D8D7D6D5         15         DB  0D8H, 0D7H, 0D6H, 0D5H, 0D4H, 0D3H, 0D2H, 0D1H
+0036 D4D3D2D1                
+003A D0CFCECD         16         DB  0D0H, 0CFH, 0CEH, 0CDH, 0CCH, 0CBH, 0CAH, 0C9H
+003E CCCBCAC9                
+0042 C8C7C6C5         17         DB  0C8H, 0C7H, 0C6H, 0C5H, 0C4H, 0C3H, 0C2H, 0C1H
+0046 C4C3C2C1                
+004A C0BFBEBD         18         DB  0C0H, 0BFH, 0BEH, 0BDH, 0BCH, 0BBH, 0BAH, 0B9H
+004E BCBBBAB9                
+0052 B8B7B6B5         19         DB  0B8H, 0B7H, 0B6H, 0B5H, 0B4H, 0B3H, 0B2H, 0B1H
+0056 B4B3B2B1                
+005A B0AFAEAD         20         DB  0B0H, 0AFH, 0AEH, 0ADH, 0ACH, 0ABH, 0AAH, 0A9H
+005E ACABAAA9                
+0062 A8A7A6A5         21         DB  0A8H, 0A7H, 0A6H, 0A5H, 0A4H, 0A3H, 0A2H, 0A1H
+0066 A4A3A2A1                
+006A A09F9E9D         22         DB  0A0H, 09FH, 09EH, 09DH, 09CH, 09BH, 09AH, 099H
+006E 9C9B9A99                
+0072 98979695         23         DB  098H, 097H, 096H, 095H, 094H, 093H, 092H, 091H
+0076 94939291                
+007A 908F8E8D         24         DB  090H, 08FH, 08EH, 08DH, 08CH, 08BH, 08AH, 089H
+007E 8C8B8A89                
+0082 88878685         25         DB  088H, 087H, 086H, 085H, 084H, 083H, 082H, 081H
+0086 84838281                
+008A 807F7E7D         26         DB  080H, 07FH, 07EH, 07DH, 07CH, 07BH, 07AH, 079H
+008E 7C7B7A79                
+0092 78777675         27         DB  078H, 077H, 076H, 075H, 074H, 073H, 072H, 071H
+0096 74737271                
+009A 706F6E6D         28         DB  070H, 06FH, 06EH, 06DH, 06CH, 06BH, 06AH, 069H
+009E 6C6B6A69                
+00A2 68676665         29         DB  068H, 067H, 066H, 065H, 064H, 063H, 062H, 061H
+00A6 64636261                
+00AA 605F5E5D         30         DB  060H, 05FH, 05EH, 05DH, 05CH, 05BH, 05AH, 059H
+00AE 5C5B5A59                
+00B2 58575655         31         DB  058H, 057H, 056H, 055H, 054H, 053H, 052H, 051H
+00B6 54535251                
+00BA 504F4E4D         32         DB  050H, 04FH, 04EH, 04DH, 04CH, 04BH, 04AH, 049H
+00BE 4C4B4A49                
+00C2 48474645         33         DB  048H, 047H, 046H, 045H, 044H, 043H, 042H, 041H
+A51 MACRO ASSEMBLER  2SCOMPLEMRNT                                                         01/30/2025 09:46:25 PAGE     2
+
+00C6 44434241                
+00CA 403F3E3D         34         DB  040H, 03FH, 03EH, 03DH, 03CH, 03BH, 03AH, 039H
+00CE 3C3B3A39                
+00D2 38373635         35         DB  038H, 037H, 036H, 035H, 034H, 033H, 032H, 031H
+00D6 34333231                
+00DA 302F2E2D         36         DB  030H, 02FH, 02EH, 02DH, 02CH, 02BH, 02AH, 029H
+00DE 2C2B2A29                
+00E2 28272625         37         DB  028H, 027H, 026H, 025H, 024H, 023H, 022H, 021H
+00E6 24232221                
+00EA 201F1E1D         38         DB  020H, 01FH, 01EH, 01DH, 01CH, 01BH, 01AH, 019H
+00EE 1C1B1A19                
+00F2 18171615         39         DB  018H, 017H, 016H, 015H, 014H, 013H, 012H, 011H
+00F6 14131211                
+00FA 100F0E0D         40         DB  010H, 00FH, 00EH, 00DH, 00CH, 00BH, 00AH, 009H
+00FE 0C0B0A09                
+0102 08070605         41         DB  008H, 007H, 006H, 005H, 004H, 003H, 002H, 001H
+0106 04030201                
+                      42         END
+A51 MACRO ASSEMBLER  2SCOMPLEMRNT                                                         01/30/2025 09:46:25 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+LOOKUP_TABLE . . .  C ADDR   000AH   A   
+MAIN . . . . . . .  C ADDR   0003H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

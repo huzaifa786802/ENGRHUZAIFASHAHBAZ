@@ -1,0 +1,42 @@
+;perform experiment by writing a program using a lookup table that reads an 8-bit number from port 1,compute its 2's comple,ment using a lookup table and output the result to por2 in 8051 keil  assembly
+ORG 0000H
+    MOV DPTR, #LOOKUP_TABLE  ; Load the address of the lookup table into DPTR
+MAIN:
+    MOV A, P1                 ; Read the 8-bit number from Port 1
+    MOVC A, @A+DPTR           ; Use the lookup table to get the 2's complement
+    MOV P2, A                 ; Output the result to Port 2
+    SJMP MAIN                 ; Repeat continuously
+LOOKUP_TABLE:
+    DB  00H, 0FFH, 0FEH, 0FDH, 0FCH, 0FBH, 0FAH, 0F9H
+    DB  0F8H, 0F7H, 0F6H, 0F5H, 0F4H, 0F3H, 0F2H, 0F1H
+    DB  0F0H, 0EFH, 0EEH, 0EDH, 0ECH, 0EBH, 0EAH, 0E9H
+    DB  0E8H, 0E7H, 0E6H, 0E5H, 0E4H, 0E3H, 0E2H, 0E1H
+    DB  0E0H, 0DFH, 0DEH, 0DDH, 0DCH, 0DBH, 0DAH, 0D9H
+    DB  0D8H, 0D7H, 0D6H, 0D5H, 0D4H, 0D3H, 0D2H, 0D1H
+    DB  0D0H, 0CFH, 0CEH, 0CDH, 0CCH, 0CBH, 0CAH, 0C9H
+    DB  0C8H, 0C7H, 0C6H, 0C5H, 0C4H, 0C3H, 0C2H, 0C1H
+    DB  0C0H, 0BFH, 0BEH, 0BDH, 0BCH, 0BBH, 0BAH, 0B9H
+    DB  0B8H, 0B7H, 0B6H, 0B5H, 0B4H, 0B3H, 0B2H, 0B1H
+    DB  0B0H, 0AFH, 0AEH, 0ADH, 0ACH, 0ABH, 0AAH, 0A9H
+    DB  0A8H, 0A7H, 0A6H, 0A5H, 0A4H, 0A3H, 0A2H, 0A1H
+    DB  0A0H, 09FH, 09EH, 09DH, 09CH, 09BH, 09AH, 099H
+    DB  098H, 097H, 096H, 095H, 094H, 093H, 092H, 091H
+    DB  090H, 08FH, 08EH, 08DH, 08CH, 08BH, 08AH, 089H
+    DB  088H, 087H, 086H, 085H, 084H, 083H, 082H, 081H
+    DB  080H, 07FH, 07EH, 07DH, 07CH, 07BH, 07AH, 079H
+    DB  078H, 077H, 076H, 075H, 074H, 073H, 072H, 071H
+    DB  070H, 06FH, 06EH, 06DH, 06CH, 06BH, 06AH, 069H
+    DB  068H, 067H, 066H, 065H, 064H, 063H, 062H, 061H
+    DB  060H, 05FH, 05EH, 05DH, 05CH, 05BH, 05AH, 059H
+    DB  058H, 057H, 056H, 055H, 054H, 053H, 052H, 051H
+    DB  050H, 04FH, 04EH, 04DH, 04CH, 04BH, 04AH, 049H
+    DB  048H, 047H, 046H, 045H, 044H, 043H, 042H, 041H
+    DB  040H, 03FH, 03EH, 03DH, 03CH, 03BH, 03AH, 039H
+    DB  038H, 037H, 036H, 035H, 034H, 033H, 032H, 031H
+    DB  030H, 02FH, 02EH, 02DH, 02CH, 02BH, 02AH, 029H
+    DB  028H, 027H, 026H, 025H, 024H, 023H, 022H, 021H
+    DB  020H, 01FH, 01EH, 01DH, 01CH, 01BH, 01AH, 019H
+    DB  018H, 017H, 016H, 015H, 014H, 013H, 012H, 011H
+    DB  010H, 00FH, 00EH, 00DH, 00CH, 00BH, 00AH, 009H
+    DB  008H, 007H, 006H, 005H, 004H, 003H, 002H, 001H
+    END

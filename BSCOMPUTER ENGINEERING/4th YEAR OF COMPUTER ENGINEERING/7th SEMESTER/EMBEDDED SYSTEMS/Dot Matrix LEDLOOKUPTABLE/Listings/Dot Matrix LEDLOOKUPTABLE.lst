@@ -1,0 +1,101 @@
+A51 MACRO ASSEMBLER  DOT_MATRIX_LEDLOOKUPTABLE                                            12/05/2024 10:20:54 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Dot Matrix LEDLOOKUPTABLE.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Dot Matrix LEDLOOKUPTABLE.a51 SET(SMALL) DEBUG PRINT(.\Listings\Dot Mat
+                      rix LEDLOOKUPTABLE.lst) OBJECT(.\Objects\Dot Matrix LEDLOOKUPTABLE.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; 8051 Assembly Program to Display First Alphabets on Dot Matrix LED
+                       2     ; Using Table Lookup Method with Delay and Repetition Technique
+0000                   3         ORG 0000H
+0000 02002B            4         LJMP MAIN        ; Jump to main program
+                       5     ; Dot Matrix LED Column Display Table for First Alphabets
+0003                   6     ALPHABET_TABLE:
+                       7         ; 5-column patterns for first alphabets (example patterns)
+                       8         ; Each byte represents one column of the character
+                       9         ; A pattern
+0003 07050505         10         DB 07H, 05H, 05H, 05H, 07H
+0007 07                      
+                      11         ; B pattern
+0008 07050705         12         DB 07H, 05H, 07H, 05H, 07H
+000C 07                      
+                      13         ; S pattern
+000D 07040701         14         DB 07H, 04H, 07H, 01H, 07H
+0011 07                      
+                      15     ; 5ms Delay Subroutine
+0012                  16     DELAY_5MS:
+0012 7F14             17         MOV R7, #20
+0014                  18     DELAY_LOOP1:
+0014 7EFA             19         MOV R6, #250
+0016                  20     DELAY_LOOP2:
+0016 DEFE             21         DJNZ R6, DELAY_LOOP2
+0018 DFFA             22         DJNZ R7, DELAY_LOOP1
+001A 22               23         RET
+                      24     ; Display Character Subroutine
+                      25     ; Input: DPTR points to character pattern, R2 = column counter
+001B                  26     DISPLAY_CHAR:
+001B 7B14             27         MOV R3, #20      ; Display character 20 times (0.5 seconds)
+001D                  28     REPEAT_CHAR:
+001D 7A05             29         MOV R2, #5       ; 5 columns to display
+001F                  30     COLUMN_LOOP:
+                      31         ; Get column pattern
+001F EA               32         MOV A, R2
+0020 14               33         DEC A            ; Adjust for 0-based indexing
+0021 93               34         MOVC A, @A+DPTR  ; Get column pattern from table
+                      35         ; Display column
+0022 F590             36         MOV P1, A        ; Output to LED
+0024 1112             37         ACALL DELAY_5MS  ; 5ms delay for column display
+                      38         ; Next column
+0026 DAF7             39         DJNZ R2, COLUMN_LOOP
+                      40         ; Repeat character display
+0028 DBF3             41         DJNZ R3, REPEAT_CHAR
+002A 22               42         RET
+                      43     ; Main Program
+002B                  44     MAIN:
+                      45         ; Initialize Port
+002B 759000           46         MOV P1, #00H     ; Clear Port 1 (Dot Matrix LED)
+                      47         ; Display First Alphabets
+                      48         ; A
+002E 900003           49         MOV DPTR, #ALPHABET_TABLE    ; Point to start of table
+0031 111B             50         ACALL DISPLAY_CHAR           ; Display 'A'
+                      51         ; B - Move DPTR to B pattern
+0033 900008           52         MOV DPTR, #ALPHABET_TABLE+5  ; Skip 5 bytes to B pattern
+0036 111B             53         ACALL DISPLAY_CHAR           ; Display 'B'
+                      54         ; S - Move DPTR to S pattern
+A51 MACRO ASSEMBLER  DOT_MATRIX_LEDLOOKUPTABLE                                            12/05/2024 10:20:54 PAGE     2
+
+0038 90000D           55         MOV DPTR, #ALPHABET_TABLE+10 ; Skip 10 bytes to S pattern
+003B 111B             56         ACALL DISPLAY_CHAR           ; Display 'S'
+                      57         ; Clear display
+003D 759000           58         MOV P1, #00H
+                      59     ; Infinite loop to stop program
+0040                  60     STOP:
+0040 80FE             61         SJMP STOP
+                      62         END
+A51 MACRO ASSEMBLER  DOT_MATRIX_LEDLOOKUPTABLE                                            12/05/2024 10:20:54 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ALPHABET_TABLE . .  C ADDR   0003H   A   
+COLUMN_LOOP. . . .  C ADDR   001FH   A   
+DELAY_5MS. . . . .  C ADDR   0012H   A   
+DELAY_LOOP1. . . .  C ADDR   0014H   A   
+DELAY_LOOP2. . . .  C ADDR   0016H   A   
+DISPLAY_CHAR . . .  C ADDR   001BH   A   
+MAIN . . . . . . .  C ADDR   002BH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+REPEAT_CHAR. . . .  C ADDR   001DH   A   
+STOP . . . . . . .  C ADDR   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

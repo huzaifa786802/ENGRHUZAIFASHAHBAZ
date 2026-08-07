@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\Dot Matrix LEDLOOKUPTABLE.obj" 
+TO ".\Objects\Dot Matrix LEDLOOKUPTABLE" 
+PRINT(".\Listings\Dot Matrix LEDLOOKUPTABLE.m51") RAMSIZE(256) 

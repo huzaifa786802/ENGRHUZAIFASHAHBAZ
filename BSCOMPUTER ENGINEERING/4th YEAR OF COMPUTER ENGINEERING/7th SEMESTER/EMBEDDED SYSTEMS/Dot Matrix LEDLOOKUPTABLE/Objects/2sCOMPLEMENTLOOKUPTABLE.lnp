@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\2scomplemrnt.obj" 
+TO ".\Objects\2sCOMPLEMENTLOOKUPTABLE" 
+PRINT(".\Listings\2sCOMPLEMENTLOOKUPTABLE.m51") RAMSIZE(256) 
