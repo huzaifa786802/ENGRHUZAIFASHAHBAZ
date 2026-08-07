@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\up counter.obj" 
+TO ".\Objects\up counter" 
+PRINT(".\Listings\up counter.m51") RAMSIZE(256) 

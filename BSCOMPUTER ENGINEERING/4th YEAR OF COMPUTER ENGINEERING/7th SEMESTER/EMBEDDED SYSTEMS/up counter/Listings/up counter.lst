@@ -1,0 +1,101 @@
+A51 MACRO ASSEMBLER  UP_COUNTER                                                           12/05/2024 10:11:10 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\up counter.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE up counter.a51 SET(SMALL) DEBUG PRINT(.\Listings\up counter.lst) OBJECT
+                      (.\Objects\up counter.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; Up Counter Program for 7-Segment Displays using Table Lookup
+0000                   2     ORG 0000H
+0000 020100            3         LJMP MAIN        ; Jump to main program
+                       4     ; 7-Segment Display Lookup Table (Common Cathode)
+                       5     ; Each entry represents the pattern to display a digit (0-9)
+0030                   6     ORG 0030H
+0030                   7     LOOKUP_TABLE:
+0030 3F                8         DB 3FH   ; 0 - 0011 1111
+0031 06                9         DB 06H   ; 1 - 0000 0110
+0032 5B               10         DB 5BH   ; 2 - 0101 1011
+0033 4F               11         DB 4FH   ; 3 - 0100 1111
+0034 66               12         DB 66H   ; 4 - 0110 0110
+0035 6D               13         DB 6DH   ; 5 - 0110 1101
+0036 7D               14         DB 7DH   ; 6 - 0111 1101
+0037 07               15         DB 07H   ; 7 - 0000 0111
+0038 7F               16         DB 7FH   ; 8 - 0111 1111
+0039 6F               17         DB 6FH   ; 9 - 0110 1111
+                      18     ; Main Program
+0100                  19     ORG 0100H
+0100                  20     MAIN:
+                      21         ; Initialize Port 1 for output (7-segment displays)
+0100 759000           22         MOV P1, #00H     ; Clear Port 1
+                      23         ; Initialize counter variables
+0103 7A00             24         MOV R2, #00H     ; Units digit
+0105 7B00             25         MOV R3, #00H     ; Tens digit
+0107                  26     COUNTER_LOOP:
+                      27         ; Display current number
+0107 311B             28         ACALL DISPLAY_NUMBER
+                      29         ; Delay for 0.1 seconds
+0109 3125             30         ACALL DELAY
+                      31         ; Increment units digit
+010B 0A               32         INC R2
+010C EA               33         MOV A, R2
+010D B40A09           34         CJNE A, #10, CHECK_CONTINUE
+                      35         ; Reset units digit and increment tens digit
+0110 7A00             36         MOV R2, #00H
+0112 0B               37         INC R3
+0113 EB               38         MOV A, R3
+0114 B40A02           39         CJNE A, #10, CHECK_CONTINUE
+                      40         ; Reset entire counter when reaching 99
+0117 7B00             41         MOV R3, #00H
+0119                  42     CHECK_CONTINUE:
+0119 80EC             43         SJMP COUNTER_LOOP
+                      44     ; Subroutine to display current number on 7-segment displays
+011B                  45     DISPLAY_NUMBER:
+                      46         ; Get segment pattern for units digit
+011B EA               47         MOV A, R2
+011C 93               48         MOVC A, @A+DPTR
+011D F590             49         MOV P1, A        ; Display on DS4 (units digit)
+                      50         ; Get segment pattern for tens digit
+011F EB               51         MOV A, R3
+0120 93               52         MOVC A, @A+DPTR
+0121 C4               53         SWAP A           ; Move tens digit pattern to upper nibble
+0122 4290             54         ORL P1, A        ; Display on DS3 (tens digit)
+0124 22               55         RET
+                      56     ; Delay Subroutine for 0.1 seconds (approximate)
+                      57     ; Assumes 12 MHz crystal oscillator
+A51 MACRO ASSEMBLER  UP_COUNTER                                                           12/05/2024 10:11:10 PAGE     2
+
+0125                  58     DELAY:
+0125 7F32             59         MOV R7, #50      ; Outer loop counter
+0127                  60     DELAY_OUTER:
+0127 7EFA             61         MOV R6, #250     ; Inner loop counter
+0129                  62     DELAY_INNER:
+0129 DEFE             63         DJNZ R6, DELAY_INNER
+012B DFFA             64         DJNZ R7, DELAY_OUTER
+012D 22               65         RET
+                      66     END
+A51 MACRO ASSEMBLER  UP_COUNTER                                                           12/05/2024 10:11:10 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CHECK_CONTINUE . .  C ADDR   0119H   A   
+COUNTER_LOOP . . .  C ADDR   0107H   A   
+DELAY. . . . . . .  C ADDR   0125H   A   
+DELAY_INNER. . . .  C ADDR   0129H   A   
+DELAY_OUTER. . . .  C ADDR   0127H   A   
+DISPLAY_NUMBER . .  C ADDR   011BH   A   
+LOOKUP_TABLE . . .  C ADDR   0030H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
