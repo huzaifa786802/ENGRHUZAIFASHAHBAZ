@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\DATAPOINTER.obj" 
+TO ".\Objects\DATAPOINTER" 
+PRINT(".\Listings\DATAPOINTER.m51") RAMSIZE(256) 

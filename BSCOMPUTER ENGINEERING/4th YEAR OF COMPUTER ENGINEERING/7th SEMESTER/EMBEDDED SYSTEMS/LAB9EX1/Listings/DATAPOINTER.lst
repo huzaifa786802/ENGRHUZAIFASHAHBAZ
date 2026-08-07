@@ -1,0 +1,101 @@
+A51 MACRO ASSEMBLER  DATAPOINTER                                                          12/05/2024 09:50:10 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\DATAPOINTER.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE DATAPOINTER.a51 SET(SMALL) DEBUG PRINT(.\Listings\DATAPOINTER.lst) OBJE
+                      CT(.\Objects\DATAPOINTER.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; LED Pattern Table Lookup Demonstration
+                       2     ; Uses MOVC A,@A+DPTR instruction to read LED patterns from program memory
+                       3     
+0000                   4     ORG 0000H
+0000 020117            5         LJMP MAIN        ; Jump to main program
+                       6     
+                       7     ; LED Pattern Table in Program Memory
+0100                   8     ORG 0100H
+0100                   9     LED_PATTERNS:
+0100 01               10         DB 01H           ; Pattern 1: First LED
+0101 02               11         DB 02H           ; Pattern 2: Second LED
+0102 04               12         DB 04H           ; Pattern 3: Third LED
+0103 08               13         DB 08H           ; Pattern 4: Fourth LED
+0104 10               14         DB 10H           ; Pattern 5: Fifth LED
+0105 20               15         DB 20H           ; Pattern 6: Sixth LED
+0106 40               16         DB 40H           ; Pattern 7: Seventh LED
+0107 80               17         DB 80H           ; Pattern 8: Eighth LED
+0108 81               18         DB 81H           ; Pattern 9: First and Last LED
+0109 42               19         DB 42H           ; Pattern 10: Second and Seventh LED
+010A 24               20         DB 24H           ; Pattern 11: Third and Sixth LED
+010B 18               21         DB 18H           ; Pattern 12: Fourth and Fifth LED
+010C 3C               22         DB 3CH           ; Pattern 13: Middle four LEDs
+010D 7E               23         DB 7EH           ; Pattern 14: Outer six LEDs
+010E 99               24         DB 99H           ; Pattern 15: Alternating LEDs
+010F 55               25         DB 55H           ; Pattern 16: Checkerboard pattern
+0110 33               26         DB 33H           ; Pattern 17: Another alternating pattern
+0111 F0               27         DB 0F0H          ; Pattern 18: Upper nibble
+0112 0F               28         DB 0FH           ; Pattern 19: Lower nibble
+0113 AA               29         DB 0AAH          ; Pattern 20: Another alternating pattern
+0114 55               30         DB 55H           ; Pattern 21: Complementary pattern
+0115 00               31         DB 00H           ; Pattern 22: All LEDs off
+0116 FF               32         DB 0FFH          ; Pattern 23: All LEDs on
+                      33     
+0117                  34     MAIN:
+0117 75A000           35         MOV P2, #00H     ; Initialize Port 2 (LED Port) to all LEDs off
+011A 900100           36         MOV DPTR, #LED_PATTERNS  ; Load data pointer to start of LED patterns
+011D 7817             37         MOV R0, #23      ; Initialize loop counter (23 patterns)
+                      38     
+011F                  39     PATTERN_LOOP:
+                      40         ; Read pattern from program memory
+011F E8               41         MOV A, R0        ; Move loop counter to accumulator
+0120 14               42         DEC A            ; Adjust for zero-based indexing
+0121 93               43         MOVC A, @A+DPTR  ; Read pattern byte from program memory
+0122 F5A0             44         MOV P2, A        ; Display pattern on Port 2 (LEDs)
+                      45     
+                      46         ; Delay routine for 0.1 seconds
+0124 312A             47         ACALL DELAY_100MS
+                      48     
+                      49         ; Decrement loop counter
+0126 D8F7             50         DJNZ R0, PATTERN_LOOP
+                      51     
+                      52         ; Infinite loop after displaying all patterns
+0128                  53     STOP:
+0128 80FE             54         SJMP STOP
+                      55     
+                      56     ; Delay Routine for approximately 0.1 seconds
+                      57     ; Assumes 12 MHz crystal oscillator
+A51 MACRO ASSEMBLER  DATAPOINTER                                                          12/05/2024 09:50:10 PAGE     2
+
+012A                  58     DELAY_100MS:
+012A 7FFA             59         MOV R7, #250     ; Outer loop counter
+012C                  60     OUTER_LOOP:
+012C 7EFA             61         MOV R6, #250     ; Inner loop counter
+012E                  62     INNER_LOOP:
+012E DEFE             63         DJNZ R6, INNER_LOOP  ; Decrement inner loop
+0130 DFFA             64         DJNZ R7, OUTER_LOOP  ; Decrement outer loop
+0132 22               65         RET
+                      66     
+                      67     END
+A51 MACRO ASSEMBLER  DATAPOINTER                                                          12/05/2024 09:50:10 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY_100MS. . . .  C ADDR   012AH   A   
+INNER_LOOP . . . .  C ADDR   012EH   A   
+LED_PATTERNS . . .  C ADDR   0100H   A   
+MAIN . . . . . . .  C ADDR   0117H   A   
+OUTER_LOOP . . . .  C ADDR   012CH   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PATTERN_LOOP . . .  C ADDR   011FH   A   
+STOP . . . . . . .  C ADDR   0128H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
