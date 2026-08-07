@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\alphabet A on Dot MatrixLEDs.obj" 
+TO ".\Objects\alphabet A on Dot MatrixLEDs" 
+PRINT(".\Listings\alphabet A on Dot MatrixLEDs.m51") RAMSIZE(256) 

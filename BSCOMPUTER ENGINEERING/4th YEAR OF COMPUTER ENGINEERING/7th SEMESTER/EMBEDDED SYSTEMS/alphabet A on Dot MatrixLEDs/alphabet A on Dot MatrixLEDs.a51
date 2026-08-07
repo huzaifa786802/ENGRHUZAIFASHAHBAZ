@@ -1,0 +1,31 @@
+ORG 000H
+CLR P1.7
+START:
+MOV DPTR,#TABLE
+MOV R2,#10000000B
+MOV R1,#0
+NEXT:
+MOV A,R1
+MOVC A,@A+DPTR
+MOV P2,A
+MOV A,R2
+MOV P0,A
+CALL DELAY
+RR A
+MOV R2,A
+INC R1
+CJNE R1,#5,NEXT
+JMP START
+;==============================
+; DELAY 5mS
+;==============================
+DELAY:
+MOV R6,#10
+DL1:
+MOV R7,#249
+DJNZ R7,$
+DJNZ R6,DL1
+RET
+;==============================
+TABLE: DB 3EH,48H,88H,48H,3EH
+END

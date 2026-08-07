@@ -1,0 +1,64 @@
+A51 MACRO ASSEMBLER  ALPHABET_A_ON_DOT_MATRIXLEDS                                         12/05/2024 09:59:19 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\alphabet A on Dot MatrixLEDs.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE alphabet A on Dot MatrixLEDs.a51 SET(SMALL) DEBUG PRINT(.\Listings\alph
+                      abet A on Dot MatrixLEDs.lst) OBJECT(.\Objects\alphabet A on Dot MatrixLEDs.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 000H
+0000 C297              2     CLR P1.7
+0002                   3     START:
+0002 900023            4     MOV DPTR,#TABLE
+0005 7A80              5     MOV R2,#10000000B
+0007 7900              6     MOV R1,#0
+0009                   7     NEXT:
+0009 E9                8     MOV A,R1
+000A 93                9     MOVC A,@A+DPTR
+000B F5A0             10     MOV P2,A
+000D EA               11     MOV A,R2
+000E F580             12     MOV P0,A
+0010 111A             13     CALL DELAY
+0012 03               14     RR A
+0013 FA               15     MOV R2,A
+0014 09               16     INC R1
+0015 B905F1           17     CJNE R1,#5,NEXT
+0018 80E8             18     JMP START
+                      19     ;==============================
+                      20     ; DELAY 5mS
+                      21     ;==============================
+001A                  22     DELAY:
+001A 7E0A             23     MOV R6,#10
+001C                  24     DL1:
+001C 7FF9             25     MOV R7,#249
+001E DFFE             26     DJNZ R7,$
+0020 DEFA             27     DJNZ R6,DL1
+0022 22               28     RET
+                      29     ;==============================
+0023 3E488848         30     TABLE: DB 3EH,48H,88H,48H,3EH
+0027 3E                      
+                      31     END
+A51 MACRO ASSEMBLER  ALPHABET_A_ON_DOT_MATRIXLEDS                                         12/05/2024 09:59:19 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   001AH   A   
+DL1. . . . . . . .  C ADDR   001CH   A   
+NEXT . . . . . . .  C ADDR   0009H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0002H   A   
+TABLE. . . . . . .  C ADDR   0023H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
