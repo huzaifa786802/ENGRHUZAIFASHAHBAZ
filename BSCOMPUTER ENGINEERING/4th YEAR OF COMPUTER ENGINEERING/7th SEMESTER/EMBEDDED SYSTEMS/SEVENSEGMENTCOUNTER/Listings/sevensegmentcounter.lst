@@ -1,0 +1,113 @@
+A51 MACRO ASSEMBLER  SEVENSEGMENTCOUNTER                                                  11/30/2024 10:58:22 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\sevensegmentcounter.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE sevensegmentcounter.a51 SET(SMALL) DEBUG PRINT(.\Listings\sevensegmentc
+                      ounter.lst) OBJECT(.\Objects\sevensegmentcounter.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;**************************************
+                       2     ; 8051 Assembly Program for Sequential Display
+                       3     ; Displays numbers 90 to 09 on DS3 (decrementing)
+                       4     ; and 09 to 90 on DS4 (incrementing)
+                       5     ; Each number stays for 0.5 seconds
+                       6     ;**************************************
+                       7     
+0000                   8     ORG 0000H
+0000 020030            9         LJMP MAIN        ; Jump to main program
+                      10     
+0030                  11     ORG 0030H
+0030                  12     MAIN:
+                      13         ; Initialize port configuration
+0030 759000           14         MOV P1, #00H     ; Clear Port 1 (assuming DS3 and DS4 are on Port 1)
+0033 75A000           15         MOV P2, #00H     ; Clear Port 2 for additional control if needed
+                      16     
+                      17         ; Initialize registers for display
+0036 7A5A             18         MOV R2, #90D     ; Starting value for DS3 (decrementing)
+0038 7B09             19         MOV R3, #09D     ; Starting value for DS4 (incrementing)
+                      20     
+003A                  21     DISPLAY_LOOP:
+                      22         ; Display on DS3 (decrementing)
+003A EA               23         MOV A, R2        ; Move current value to Accumulator
+003B 1152             24         ACALL DISPLAY    ; Call display subroutine
+                      25         
+                      26         ; Display on DS4 (incrementing)
+003D EB               27         MOV A, R3        ; Move current value to Accumulator
+003E 1152             28         ACALL DISPLAY    ; Call display subroutine
+                      29         
+                      30         ; Delay for 0.5 seconds
+0040 1155             31         ACALL DELAY_500MS
+                      32         
+                      33         ; Decrement DS3 value
+0042 1A               34         DEC R2           ; Decrement R2
+                      35         
+                      36         ; Increment DS4 value
+0043 0B               37         INC R3           ; Increment R3
+                      38         
+                      39         ; Check if we need to reset values
+0044 EA               40         MOV A, R2        ; Check DS3 value
+0045 B40808           41         CJNE A, #08H, CONTINUE_LOOP  ; If not reached 08, continue
+0048 7A5A             42         MOV R2, #90D     ; Reset DS3 to 90
+                      43         
+004A EB               44         MOV A, R3        ; Check DS4 value
+004B B49102           45         CJNE A, #91H, CONTINUE_LOOP  ; If not reached 91, continue
+004E 7B09             46         MOV R3, #09D     ; Reset DS4 to 09
+                      47     
+0050                  48     CONTINUE_LOOP:
+0050 80E8             49         SJMP DISPLAY_LOOP  ; Repeat the loop
+                      50     
+                      51     ;**************************************
+                      52     ; DISPLAY Subroutine
+                      53     ; Displays the value in Accumulator
+                      54     ;**************************************
+0052                  55     DISPLAY:
+                      56         ; Conversion and display logic goes here
+                      57         ; This is a placeholder - actual implementation 
+A51 MACRO ASSEMBLER  SEVENSEGMENTCOUNTER                                                  11/30/2024 10:58:22 PAGE     2
+
+                      58         ; depends on your specific display setup
+0052 F590             59         MOV P1, A        ; Simple display on Port 1
+0054 22               60         RET
+                      61     
+                      62     ;**************************************
+                      63     ; DELAY Subroutine
+                      64     ; Creates a 0.5 second delay
+                      65     ; Note: Delay calculation depends on 
+                      66     ; microcontroller clock frequency
+                      67     ;**************************************
+0055                  68     DELAY_500MS:
+                      69         ; Delay calculation example for 12 MHz crystal
+                      70         ; Adjust these nested loops based on your specific clock
+0055 7EFA             71         MOV R6, #250     ; Outer loop counter
+0057                  72     OUTER_LOOP:
+0057 7FFA             73         MOV R7, #250     ; Inner loop counter
+0059                  74     INNER_LOOP:
+0059 DFFE             75         DJNZ R7, INNER_LOOP  ; Decrement inner loop
+005B DEFA             76         DJNZ R6, OUTER_LOOP  ; Decrement outer loop
+005D 22               77         RET
+                      78     END
+A51 MACRO ASSEMBLER  SEVENSEGMENTCOUNTER                                                  11/30/2024 10:58:22 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CONTINUE_LOOP. . .  C ADDR   0050H   A   
+DELAY_500MS. . . .  C ADDR   0055H   A   
+DISPLAY. . . . . .  C ADDR   0052H   A   
+DISPLAY_LOOP . . .  C ADDR   003AH   A   
+INNER_LOOP . . . .  C ADDR   0059H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+OUTER_LOOP . . . .  C ADDR   0057H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
