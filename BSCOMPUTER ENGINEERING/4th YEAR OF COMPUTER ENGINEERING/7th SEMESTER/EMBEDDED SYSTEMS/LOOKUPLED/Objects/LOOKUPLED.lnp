@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\LOOKUPLED.obj" 
+TO ".\Objects\LOOKUPLED" 
+PRINT(".\Listings\LOOKUPLED.m51") RAMSIZE(256) 

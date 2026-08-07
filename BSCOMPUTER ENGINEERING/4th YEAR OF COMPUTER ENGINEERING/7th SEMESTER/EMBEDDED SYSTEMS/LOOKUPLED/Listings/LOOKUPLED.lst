@@ -1,0 +1,58 @@
+A51 MACRO ASSEMBLER  LOOKUPLED                                                            11/13/2024 23:24:10 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\LOOKUPLED.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LOOKUPLED.a51 SET(SMALL) DEBUG PRINT(.\Listings\LOOKUPLED.lst) OBJECT(.
+                      \Objects\LOOKUPLED.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; 8051 Assembly Code for LED Patterns using Table Lookup
+                       2     ; This program demonstrates LED patterns stored in memory.
+                       3     ; Each pattern stays on for 0.1 seconds.
+0000                   4     ORG 0000H       ; Origin, start of program memory
+                       5     ; Define the LED patterns in a lookup table
+0000 01020408          6     PATTERNS: DB 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80 ; 8 patterns for LEDs
+0004 10204080                
+                       7     ; Define constants
+  00FA                 8     DELAY_COUNT EQU 250 ; Adjust this value to achieve approximately 0.1 seconds delay
+                       9     ; Main program starts here
+0008                  10     START:  
+0008 900000           11         MOV DPTR, #PATTERNS ; Point to the start of the patterns table
+000B 7808             12         MOV R0, #08          ; Set R0 to number of patterns (8)
+000D                  13     MAIN_LOOP:
+000D E4               14         CLR A                 ; Clear accumulator
+000E 93               15         MOVC A, @A+DPTR      ; Load pattern from lookup table into accumulator
+000F F590             16         MOV P1, A            ; Output the pattern to Port 1 (LEDs connected here)
+0011 1118             17         ACALL DELAY          ; Call delay subroutine
+0013 A3               18         INC DPTR             ; Move to the next pattern in the table
+0014 D8F7             19         DJNZ R0, MAIN_LOOP   ; Decrement R0 and repeat if not zero
+0016 80F0             20         SJMP START           ; Repeat the main loop indefinitely
+0018                  21     DELAY:  
+0018 79FA             22         MOV R1, #DELAY_COUNT ; Load delay count into R1
+001A                  23     DELAY_LOOP:
+001A D9FE             24         DJNZ R1, DELAY_LOOP  ; Decrement R1 until it reaches zero
+001C 22               25         RET                   ; Return from delay subroutine
+                      26     END                     ; End of program
+A51 MACRO ASSEMBLER  LOOKUPLED                                                            11/13/2024 23:24:10 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0018H   A   
+DELAY_COUNT. . . .  N NUMB   00FAH   A   
+DELAY_LOOP . . . .  C ADDR   001AH   A   
+MAIN_LOOP. . . . .  C ADDR   000DH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PATTERNS . . . . .  C ADDR   0000H   A   
+START. . . . . . .  C ADDR   0008H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
