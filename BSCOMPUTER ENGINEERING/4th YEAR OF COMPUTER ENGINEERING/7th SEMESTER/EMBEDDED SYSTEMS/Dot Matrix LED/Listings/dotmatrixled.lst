@@ -1,0 +1,64 @@
+A51 MACRO ASSEMBLER  DOTMATRIXLED                                                         11/13/2024 23:32:05 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\dotmatrixled.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE dotmatrixled.a51 SET(SMALL) DEBUG PRINT(.\Listings\dotmatrixled.lst) OB
+                      JECT(.\Objects\dotmatrixled.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H          
+0000 7590FF            2     MOV P1, #0FFH   
+0003 75A000            3     MOV P2, #00H    
+0006 183C66C3          4     A_PATTERN: DB 0x18, 0x3C, 0x66, 0xC3, 0xFF, 0xC3, 0xC3, 0xC3
+000A FFC3C3C3                
+000E                   5     MAIN:           ; Main loop to continuously display the letter
+000E 7806              6         MOV R0, #A_PATTERN    
+0010                   7     DISPLAY:
+0010 7908              8         MOV R1, #08H          
+0012                   9     DISPLAY_ROW:
+0012 E6               10         MOV A, @R0            
+0013 F590             11         MOV P1, A             
+0015 E9               12         MOV A, R1             
+0016 F4               13         CPL A                 
+0017 F5A0             14         MOV P2, A             
+0019 1123             15         ACALL DELAY           
+001B 08               16         INC R0                
+001C E9               17         MOV A, R1
+001D 23               18         RL A                  
+001E F9               19         MOV R1, A             
+001F D9F1             20         DJNZ R1, DISPLAY_ROW  
+0021 80EB             21         SJMP MAIN             
+0023                  22     DELAY:
+0023 7AFF             23         MOV R2, #255
+0025                  24     DELAY_LOOP1:
+0025 DAFE             25         DJNZ R2, DELAY_LOOP1
+0027 7AFF             26         MOV R2, #255
+0029                  27     DELAY_LOOP2:
+0029 DAFE             28         DJNZ R2, DELAY_LOOP2
+002B 22               29         RET
+                      30     END
+A51 MACRO ASSEMBLER  DOTMATRIXLED                                                         11/13/2024 23:32:05 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+A_PATTERN. . . . .  C ADDR   0006H   A   
+DELAY. . . . . . .  C ADDR   0023H   A   
+DELAY_LOOP1. . . .  C ADDR   0025H   A   
+DELAY_LOOP2. . . .  C ADDR   0029H   A   
+DISPLAY. . . . . .  C ADDR   0010H   A   
+DISPLAY_ROW. . . .  C ADDR   0012H   A   
+MAIN . . . . . . .  C ADDR   000EH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

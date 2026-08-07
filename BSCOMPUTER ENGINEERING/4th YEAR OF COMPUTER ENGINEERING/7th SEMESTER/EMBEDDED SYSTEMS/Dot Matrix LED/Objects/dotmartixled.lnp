@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\dotmatrixled.obj" 
+TO ".\Objects\dotmartixled" 
+PRINT(".\Listings\dotmartixled.m51") RAMSIZE(256) 
