@@ -1,0 +1,99 @@
+A51 MACRO ASSEMBLER  8LEDS                                                                11/06/2024 18:20:29 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\8LEDs.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE 8LEDs.a51 SET(SMALL) DEBUG PRINT(.\Listings\8LEDs.lst) OBJECT(.\Objects
+                      \8LEDs.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H         ; Start from address 0
+0000 7590FF            2     MOV P1, #0FFH  ; Initialize Port 1 (turn off all LEDs initially)
+                       3     
+                       4     ; Define delay subroutine
+0003                   5     DELAY:
+0003 78FA              6         MOV R0, #250
+0005                   7     DELAY_LOOP:
+0005 D8FE              8         DJNZ R0, DELAY_LOOP
+0007 22                9         RET
+                      10     
+                      11     ; Main program
+0008                  12     MAIN:
+                      13         ; Repeat each case 8 times
+0008 7A08             14         MOV R2, #8    ; Set loop count for 8 repetitions
+                      15     
+                      16     ; Case 1: Turn on LEDs from left to right
+000A                  17     CASE1_LOOP:
+000A 7401             18         MOV A, #01H   ; Start with the leftmost LED on (bit 0)
+000C                  19     CASE1_SHIFT:
+000C F590             20         MOV P1, A     ; Output the current value to LEDs
+000E 1103             21         ACALL DELAY   ; Call delay subroutine
+0010 23               22         RL A          ; Shift LED pattern left
+0011 B400F8           23         CJNE A, #0, CASE1_SHIFT ; Repeat until all LEDs are on
+0014 DAF4             24         DJNZ R2, CASE1_LOOP     ; Repeat case 1
+                      25     
+                      26         ; Reset loop count for next case
+0016 7A08             27         MOV R2, #8    
+                      28     
+                      29     ; Case 2: Turn on LEDs from right to left
+0018                  30     CASE2_LOOP:
+0018 7480             31         MOV A, #80H   ; Start with the rightmost LED on (bit 7)
+001A                  32     CASE2_SHIFT:
+001A F590             33         MOV P1, A     ; Output the current value to LEDs
+001C 1103             34         ACALL DELAY   ; Call delay subroutine
+001E 03               35         RR A          ; Shift LED pattern right
+001F B400F8           36         CJNE A, #0, CASE2_SHIFT ; Repeat until all LEDs are on
+0022 DAF4             37         DJNZ R2, CASE2_LOOP     ; Repeat case 2
+                      38     
+                      39         ; Reset loop count for next case
+0024 7A08             40         MOV R2, #8
+                      41     
+                      42     ; Case 3: Blink two sets (left and right) alternately
+0026                  43     CASE3_LOOP:
+0026 7590F0           44         MOV P1, #0F0H ; Turn on the left set of LEDs
+0029 1103             45         ACALL DELAY
+002B 75900F           46         MOV P1, #0FH  ; Turn on the right set of LEDs
+002E 1103             47         ACALL DELAY
+0030 DAF4             48         DJNZ R2, CASE3_LOOP
+                      49     
+                      50         ; Reset loop count for next case
+0032 7A08             51         MOV R2, #8
+                      52     
+                      53     ; Case 4: Blink all 8 LEDs
+0034                  54     CASE4_LOOP:
+0034 759000           55         MOV P1, #00H  ; Turn all LEDs on
+0037 1103             56         ACALL DELAY
+0039 7590FF           57         MOV P1, #0FFH ; Turn all LEDs off
+A51 MACRO ASSEMBLER  8LEDS                                                                11/06/2024 18:20:29 PAGE     2
+
+003C 1103             58         ACALL DELAY
+003E DAF4             59         DJNZ R2, CASE4_LOOP
+                      60     
+0040 80C6             61         SJMP MAIN     ; Repeat the entire sequence indefinitely
+                      62     
+                      63     END
+A51 MACRO ASSEMBLER  8LEDS                                                                11/06/2024 18:20:29 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CASE1_LOOP . . . .  C ADDR   000AH   A   
+CASE1_SHIFT. . . .  C ADDR   000CH   A   
+CASE2_LOOP . . . .  C ADDR   0018H   A   
+CASE2_SHIFT. . . .  C ADDR   001AH   A   
+CASE3_LOOP . . . .  C ADDR   0026H   A   
+CASE4_LOOP . . . .  C ADDR   0034H   A   
+DELAY. . . . . . .  C ADDR   0003H   A   
+DELAY_LOOP . . . .  C ADDR   0005H   A   
+MAIN . . . . . . .  C ADDR   0008H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
