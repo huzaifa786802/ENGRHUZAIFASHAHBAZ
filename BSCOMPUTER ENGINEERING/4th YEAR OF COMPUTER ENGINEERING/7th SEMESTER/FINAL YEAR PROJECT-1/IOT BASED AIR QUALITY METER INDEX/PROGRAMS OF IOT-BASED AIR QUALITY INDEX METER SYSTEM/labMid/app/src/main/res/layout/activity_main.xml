@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 1. Name Field -->
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Name" />
+
+        <!-- 2. Email Field -->
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Email"
+            android:inputType="textEmailAddress" />
+
+        <!-- 3. Password Field -->
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Password"
+            android:inputType="textPassword" />
+
+        <!-- 4. Date Picker -->
+        <EditText
+            android:id="@+id/etDOB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select Date of Birth"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="none" />
+
+        <!-- 5. Gender Selection -->
+        <RadioGroup
+            android:id="@+id/genderGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/rbFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female" />
+        </RadioGroup>
+
+        <!-- 6. Newsletter Subscription -->
+        <CheckBox
+            android:id="@+id/cbSubscribe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subscribe to Newsletter" />
+
+        <!-- 7. Notifications -->
+        <Switch
+            android:id="@+id/switchNotify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable Notifications"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <!-- 8. Spinner (Dropdown) -->
+        <Spinner
+            android:id="@+id/spinnerSubjects"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- 9. RatingBar -->
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1.0" />
+
+        <!-- 10. Submit Button -->
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Submit" />
+    </LinearLayout>
+</ScrollView>
