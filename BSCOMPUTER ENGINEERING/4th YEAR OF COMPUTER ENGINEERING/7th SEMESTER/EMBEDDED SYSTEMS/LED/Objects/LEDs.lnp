@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\LEDs.obj" 
+TO ".\Objects\LEDs" 
+PRINT(".\Listings\LEDs.m51") RAMSIZE(256) 

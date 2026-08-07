@@ -1,0 +1,109 @@
+A51 MACRO ASSEMBLER  LEDS                                                                 12/05/2024 09:55:57 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\LEDs.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LEDs.a51 SET(SMALL) DEBUG PRINT(.\Listings\LEDs.lst) OBJECT(.\Objects\L
+                      EDs.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 000H
+0000                   2     START:
+0000 7808              3     MOV R0,#8
+0002                   4     NEXT1:
+0002 111A              5     CALL RIGHT
+0004 D8FC              6     DJNZ R0,NEXT1
+0006 7808              7     MOV R0,#8
+0008                   8     NEXT2:
+0008 1125              9     CALL LEFT
+000A D8FC             10     DJNZ R0,NEXT2
+000C 7808             11     MOV R0,#8
+000E                  12     NEXT3:
+000E 1130             13     CALL SHOW1
+0010 D8FC             14     DJNZ R0,NEXT3
+0012 7808             15     MOV R0,#8
+0014                  16     NEXT4:
+0014 113C             17     CALL SHOW2
+0016 D8FC             18     DJNZ R0,NEXT4
+0018 80E6             19     JMP START
+                      20     ;==============================
+001A                  21     RIGHT:
+001A 7480             22     MOV A,#10000000B
+001C                  23     N_R:
+001C F5A0             24     MOV P2,A
+001E 1148             25     CALL DELAY
+0020 03               26     RR A
+0021 B480F8           27     CJNE A,#10000000B,N_R
+0024 22               28     RET
+                      29     ;==============================
+0025                  30     LEFT:
+0025 7401             31     MOV A,#00000001B
+0027                  32     N_L:
+0027 F5A0             33     MOV P2,A
+0029 1148             34     CALL DELAY
+002B 23               35     RL A
+002C B401F8           36     CJNE A,#00000001B,N_L
+002F 22               37     RET
+                      38     ;==============================
+0030                  39     SHOW1:
+0030 740F             40     MOV A,#00001111B
+0032 F5A0             41     MOV P2,A
+0034 1148             42     CALL DELAY
+0036 C4               43     SWAP A
+0037 F5A0             44     MOV P2,A
+0039 1148             45     CALL DELAY
+003B 22               46     RET
+                      47     ;==============================
+003C                  48     SHOW2:
+003C                  49     MOV A,#FFH
+*** ________________________________^
+*** ERROR #A45 IN 49 (LEDs.a51, LINE 49): UNDEFINED SYMBOL (PASS-2)
+003E F5A0             50     MOV P2,A
+0040 1148             51     CALL DELAY
+0042 F4               52     CPL A
+0043 F5A0             53     MOV P2,A
+0045 1148             54     CALL DELAY
+0047 22               55     RET
+A51 MACRO ASSEMBLER  LEDS                                                                 12/05/2024 09:55:57 PAGE     2
+
+                      56     ;==============================
+                      57     ; DELAY 0.1S
+                      58     ;==============================
+0048                  59     DELAY:
+0048 7EC8             60     MOV R6,#200
+004A                  61     DL1:
+004A 7FF9             62     MOV R7,#249
+004C DFFE             63     DJNZ R7,$
+004E DEFA             64     DJNZ R6,DL1
+0050 22               65     RET
+                      66     END
+A51 MACRO ASSEMBLER  LEDS                                                                 12/05/2024 09:55:57 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0048H   A   
+DL1. . . . . . . .  C ADDR   004AH   A   
+FFH. . . . . . . .    ----   -----       
+LEFT . . . . . . .  C ADDR   0025H   A   
+NEXT1. . . . . . .  C ADDR   0002H   A   
+NEXT2. . . . . . .  C ADDR   0008H   A   
+NEXT3. . . . . . .  C ADDR   000EH   A   
+NEXT4. . . . . . .  C ADDR   0014H   A   
+N_L. . . . . . . .  C ADDR   0027H   A   
+N_R. . . . . . . .  C ADDR   001CH   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+RIGHT. . . . . . .  C ADDR   001AH   A   
+SHOW1. . . . . . .  C ADDR   0030H   A   
+SHOW2. . . . . . .  C ADDR   003CH   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 1 ERROR(S)

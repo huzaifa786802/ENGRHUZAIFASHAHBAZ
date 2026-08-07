@@ -1,0 +1,66 @@
+ORG 000H
+START:
+MOV R0,#8
+NEXT1:
+CALL RIGHT
+DJNZ R0,NEXT1
+MOV R0,#8
+NEXT2:
+CALL LEFT
+DJNZ R0,NEXT2
+MOV R0,#8
+NEXT3:
+CALL SHOW1
+DJNZ R0,NEXT3
+MOV R0,#8
+NEXT4:
+CALL SHOW2
+DJNZ R0,NEXT4
+JMP START
+;==============================
+RIGHT:
+MOV A,#10000000B
+N_R:
+MOV P2,A
+CALL DELAY
+RR A
+CJNE A,#10000000B,N_R
+RET
+;==============================
+LEFT:
+MOV A,#00000001B
+N_L:
+MOV P2,A
+CALL DELAY
+RL A
+CJNE A,#00000001B,N_L
+RET
+;==============================
+SHOW1:
+MOV A,#00001111B
+MOV P2,A
+CALL DELAY
+SWAP A
+MOV P2,A
+CALL DELAY
+RET
+;==============================
+SHOW2:
+MOV A,#FFH
+MOV P2,A
+CALL DELAY
+CPL A
+MOV P2,A
+CALL DELAY
+RET
+;==============================
+; DELAY 0.1S
+;==============================
+DELAY:
+MOV R6,#200
+DL1:
+MOV R7,#249
+DJNZ R7,$
+DJNZ R6,DL1
+RET
+END
