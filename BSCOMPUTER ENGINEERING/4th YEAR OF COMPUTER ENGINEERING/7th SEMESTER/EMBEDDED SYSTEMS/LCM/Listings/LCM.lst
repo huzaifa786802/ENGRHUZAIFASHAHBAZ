@@ -1,0 +1,112 @@
+A51 MACRO ASSEMBLER  LCM                                                                  01/23/2025 09:47:52 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\LCM.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE LCM.a51 SET(SMALL) DEBUG PRINT(.\Listings\LCM.lst) OBJECT(.\Objects\LCM
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+  00A0                 2     LCD_DATA EQU P2        
+  00B0                 3     LCD_CTRL EQU P3        
+  0000                 4     RS EQU 0               
+  0001                 5     RW EQU 1               
+  0002                 6     EN EQU 2               
+0000 48656C6C          7     MSG: DB 'Hello! Welcome' 
+0004 6F212057                
+0008 656C636F                
+000C 6D65                    
+000E                   8     INIT_LCD:
+000E 7438              9         MOV A, #38H         
+0010 111F             10         ACALL CMD
+0012 740E             11         MOV A, #0EH         
+0014 111F             12         ACALL CMD
+0016 7401             13         MOV A, #01H         
+0018 111F             14         ACALL CMD
+001A 7406             15         MOV A, #06H         
+001C 111F             16         ACALL CMD
+001E 22               17         RET
+001F                  18     CMD:
+001F C200             19         CLR RS              
+0021 C201             20         CLR RW              
+0023 D202             21         SETB EN             
+0025 F5A0             22         MOV LCD_DATA, A     
+0027 C202             23         CLR EN              
+0029 1139             24         ACALL DELAY
+002B 22               25         RET
+002C                  26     WRITE:
+002C D200             27         SETB RS             
+002E C201             28         CLR RW              
+0030 D202             29         SETB EN             
+0032 F5A0             30         MOV LCD_DATA, A     
+0034 C202             31         CLR EN              
+0036 1139             32         ACALL DELAY
+0038 22               33         RET
+0039                  34     DELAY:
+0039 79FA             35         MOV R1, #250
+003B                  36     DELAY_LOOP1:
+003B 7AFA             37         MOV R2, #250
+003D                  38     DELAY_LOOP2:
+003D 7BFA             39         MOV R3, #250
+003F                  40     DELAY_LOOP3:
+003F DBFE             41         DJNZ R3, DELAY_LOOP3
+0041 DAFA             42         DJNZ R2, DELAY_LOOP2
+0043 D9F6             43         DJNZ R1, DELAY_LOOP1
+0045 22               44         RET
+0046                  45     START:
+0046 110E             46         ACALL INIT_LCD       
+0048                  47     MAIN_LOOP:
+0048 7480             48         MOV A, #80H         
+004A 111F             49         ACALL CMD
+004C 900000           50         MOV DPTR, #MSG      
+004F                  51     DISP_MSG:
+004F E4               52         CLR A
+0050 93               53         MOVC A, @A+DPTR     
+0051 6005             54         JZ BLINK            
+A51 MACRO ASSEMBLER  LCM                                                                  01/23/2025 09:47:52 PAGE     2
+
+0053 112C             55         ACALL WRITE         
+0055 A3               56         INC DPTR            
+0056 80F7             57         SJMP DISP_MSG       
+0058                  58     BLINK:
+0058 1139             59         ACALL DELAY         
+005A 7401             60         MOV A, #01H         
+005C 111F             61         ACALL CMD
+005E 1139             62         ACALL DELAY         
+0060 80E6             63         SJMP MAIN_LOOP      
+                      64     END
+A51 MACRO ASSEMBLER  LCM                                                                  01/23/2025 09:47:52 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BLINK. . . . . . .  C ADDR   0058H   A   
+CMD. . . . . . . .  C ADDR   001FH   A   
+DELAY. . . . . . .  C ADDR   0039H   A   
+DELAY_LOOP1. . . .  C ADDR   003BH   A   
+DELAY_LOOP2. . . .  C ADDR   003DH   A   
+DELAY_LOOP3. . . .  C ADDR   003FH   A   
+DISP_MSG . . . . .  C ADDR   004FH   A   
+EN . . . . . . . .  N NUMB   0002H   A   
+INIT_LCD . . . . .  C ADDR   000EH   A   
+LCD_CTRL . . . . .  D ADDR   00B0H   A   
+LCD_DATA . . . . .  D ADDR   00A0H   A   
+MAIN_LOOP. . . . .  C ADDR   0048H   A   
+MSG. . . . . . . .  C ADDR   0000H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+RS . . . . . . . .  N NUMB   0000H   A   
+RW . . . . . . . .  N NUMB   0001H   A   
+START. . . . . . .  C ADDR   0046H   A   
+WRITE. . . . . . .  C ADDR   002CH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
