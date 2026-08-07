@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\INVERTEDLED.obj" 
+TO ".\Objects\INVERTEDLED" 
+PRINT(".\Listings\INVERTEDLED.m51") RAMSIZE(256) 

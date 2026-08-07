@@ -1,0 +1,71 @@
+A51 MACRO ASSEMBLER  INVERTEDLED                                                          11/13/2024 23:07:08 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\INVERTEDLED.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE INVERTEDLED.a51 SET(SMALL) DEBUG PRINT(.\Listings\INVERTEDLED.lst) OBJE
+                      CT(.\Objects\INVERTEDLED.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; 8051 Assembly Code to Sequentially Blink Two LEDs
+                       2     ; LEDs connected to P1.0 and P1.1
+                       3     
+0000                   4     ORG 00H          ; Origin, start of the program
+                       5     
+0000                   6     START: 
+0000 759000            7         MOV P1, #00H ; Initialize Port 1 (turn off both LEDs)
+                       8     
+0003                   9     MAIN: 
+                      10         ; Turn on LEDs from ends towards the middle
+0003 7401             11         MOV A, #01H   ; Start with LED at P1.0
+0005 F590             12         MOV P1, A     ; Output to Port 1
+                      13     
+0007 111D             14         ACALL DELAY   ; Call delay
+0009 7402             15         MOV A, #02H   ; Next LED at P1.1
+000B F590             16         MOV P1, A     ; Output to Port 1
+                      17     
+000D 111D             18         ACALL DELAY   ; Call delay
+                      19     
+                      20         ; Invert sequence after reaching the middle
+000F 7401             21         MOV A, #01H   ; Reset to LED at P1.0
+0011 F590             22         MOV P1, A     ; Output to Port 1
+                      23     
+0013 111D             24         ACALL DELAY   ; Call delay
+0015 7400             25         MOV A, #00H   ; Turn off both LEDs
+0017 F590             26         MOV P1, A     ; Output to Port 1
+                      27     
+0019 111D             28         ACALL DELAY   ; Call delay
+                      29     
+001B 80E6             30         SJMP MAIN     ; Repeat the sequence
+                      31     
+001D                  32     DELAY: 
+001D 78FF             33         MOV R0, #255  ; Outer loop counter
+001F                  34     DELAY_LOOP:
+001F 79FF             35         MOV R1, #255  ; Inner loop counter
+0021                  36     INNER_LOOP:
+0021 D9FE             37         DJNZ R1, INNER_LOOP ; Decrement and loop if not zero
+0023 D8FA             38         DJNZ R0, DELAY_LOOP  ; Decrement outer loop and repeat if not zero
+0025 22               39         RET             ; Return from subroutine
+                      40     
+                      41     END                ; End of program
+A51 MACRO ASSEMBLER  INVERTEDLED                                                          11/13/2024 23:07:08 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   001DH   A   
+DELAY_LOOP . . . .  C ADDR   001FH   A   
+INNER_LOOP . . . .  C ADDR   0021H   A   
+MAIN . . . . . . .  C ADDR   0003H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
