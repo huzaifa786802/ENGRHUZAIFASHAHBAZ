@@ -1,0 +1,8 @@
+[
+{
+  "directory": "D:/blinkled/build",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/blinkled.dir/includes_CXX.rsp -g -o CMakeFiles\\blinkled.dir\\blinkled.cpp.obj -c D:\\blinkled\\blinkled.cpp",
+  "file": "D:/blinkled/blinkled.cpp",
+  "output": "CMakeFiles/blinkled.dir/blinkled.cpp.obj"
+}
+]
