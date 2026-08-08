@@ -1,0 +1,16 @@
+clear all;
+close all;
+clc;
+I = imread('moon.tif');
+I=im2double(I);
+S = filter2(fspecial('average',9),I);
+subplot(2,2,1);
+imshow(I);title('Original Image');
+subplot(2,2,2);
+imshow(S);title('Smooth Image');
+K = imsubtract(I,S);
+subplot(2,2,3);
+imshow(K);title('Sharp image');
+L = imadd(I,K);
+subplot(2,2,4);
+imshow(L);title('Enhanced image');
