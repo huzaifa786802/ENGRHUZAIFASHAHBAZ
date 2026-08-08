@@ -1,0 +1,28 @@
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+image_path = ('Screenshot 2024-11-01 094346.jpg')  # Update this with the path to your image
+image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+sobel_horizontal = cv2.Sobel(image, cv2.CV_64F, 1, 0, ksize=5)
+sobel_vertical = cv2.Sobel(image, cv2.CV_64F, 0, 1, ksize=5)
+sobel_combined = cv2.magnitude(sobel_horizontal, sobel_vertical)
+sobel_combined = cv2.normalize(sobel_combined, None, 0, 255, cv2.NORM_MINMAX)
+sobel_combined = np.uint8(sobel_combined)
+plt.figure(figsize=(10, 8))
+plt.subplot(1, 3, 1)
+plt.title('Original Image')
+plt.imshow(image, cmap='gray')
+plt.axis('off')
+plt.subplot(1, 3, 2)
+plt.title('Horizontal Sobel')
+plt.imshow(sobel_horizontal, cmap='gray')
+plt.axis('off')
+plt.subplot(1, 3, 3)
+plt.title('Vertical Sobel')
+plt.imshow(sobel_vertical, cmap='gray')
+plt.axis('off')
+plt.figure(figsize=(5, 5))
+plt.title('Combined Sobel Edges')
+plt.imshow(sobel_combined, cmap='gray')
+plt.axis('off')
+plt.show()
