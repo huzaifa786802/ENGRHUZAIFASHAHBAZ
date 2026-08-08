@@ -1,0 +1,2 @@
+#define blinkled_VERSION_MAJOR @blinkled_VERSION_MAJOR@
+#define blinkled_VERSION_MINOR @blinkled_VERSION_MINOR@
