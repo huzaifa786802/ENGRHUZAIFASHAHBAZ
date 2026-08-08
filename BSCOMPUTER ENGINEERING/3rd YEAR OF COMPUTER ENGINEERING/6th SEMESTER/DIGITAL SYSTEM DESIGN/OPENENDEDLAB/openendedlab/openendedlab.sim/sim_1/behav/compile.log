@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/BSCOMPUTER ENGINEERING/3rd YEAR OF COMPUTER ENGINEERING/6th SEMESTER/DIGITAL SYSTEM DESIGN/OPENENDEDLAB/openendedlab/openendedlab.srcs/sources_1/imports/new/statemachine.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module statemachine
+ERROR: [VRFC 10-1412] syntax error near gear_down [D:/BSCOMPUTER ENGINEERING/3rd YEAR OF COMPUTER ENGINEERING/6th SEMESTER/DIGITAL SYSTEM DESIGN/OPENENDEDLAB/openendedlab/openendedlab.srcs/sources_1/imports/new/statemachine.v:107]
+ERROR: [VRFC 10-1040] module statemachine ignored due to previous errors [D:/BSCOMPUTER ENGINEERING/3rd YEAR OF COMPUTER ENGINEERING/6th SEMESTER/DIGITAL SYSTEM DESIGN/OPENENDEDLAB/openendedlab/openendedlab.srcs/sources_1/imports/new/statemachine.v:20]
