@@ -1,0 +1,16 @@
+
+# Large media files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.flv
+
+# Large archives
+*.rar
+*.zip
+*.7z
+*.tar.gz
+
+# Large documents
+*.pdf
