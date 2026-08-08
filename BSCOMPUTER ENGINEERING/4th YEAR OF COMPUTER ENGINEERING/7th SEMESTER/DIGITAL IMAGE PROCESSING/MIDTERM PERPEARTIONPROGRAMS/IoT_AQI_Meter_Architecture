@@ -1,0 +1,68 @@
+digraph "IoT-based_AQI_Meter_System_Architecture" {
+	rankdir=TB size=10
+	"Data Collection Layer (Hardware)" [label="Data Collection Layer (Hardware)" fillcolor=green shape=box style=filled]
+	"Connectivity Layer" [label="Connectivity Layer" fillcolor=blue shape=box style=filled]
+	"Data Processing & Storage Layer" [label="Data Processing & Storage Layer" fillcolor=red shape=box style=filled]
+	"Visualization & User Interface Layer" [label="Visualization & User Interface Layer" fillcolor=yellow shape=box style=filled]
+	"Development & Maintenance" [label="Development & Maintenance" fillcolor=gray shape=box style=filled]
+	"Sensor Nodes
+(ESP32/ESP8266, MQ Sensors, PM2.5, PM10)" [label="Sensor Nodes
+(ESP32/ESP8266, MQ Sensors, PM2.5, PM10)" shape=box]
+	"Data Collection Layer (Hardware)" -> "Sensor Nodes
+(ESP32/ESP8266, MQ Sensors, PM2.5, PM10)"
+	"Power Management
+(Battery Pack, Charger, Adapter)" [label="Power Management
+(Battery Pack, Charger, Adapter)" shape=box]
+	"Data Collection Layer (Hardware)" -> "Power Management
+(Battery Pack, Charger, Adapter)"
+	"Hardware Enclosure
+(Weatherproof Housing, Breadboard, Wires)" [label="Hardware Enclosure
+(Weatherproof Housing, Breadboard, Wires)" shape=box]
+	"Data Collection Layer (Hardware)" -> "Hardware Enclosure
+(Weatherproof Housing, Breadboard, Wires)"
+	"Communication Protocol
+(MQTT, HTTP, WebSockets, Wi-Fi)" [label="Communication Protocol
+(MQTT, HTTP, WebSockets, Wi-Fi)" shape=box]
+	"Connectivity Layer" -> "Communication Protocol
+(MQTT, HTTP, WebSockets, Wi-Fi)"
+	"Authentication
+(API Keys, Auth Mechanisms)" [label="Authentication
+(API Keys, Auth Mechanisms)" shape=box]
+	"Connectivity Layer" -> "Authentication
+(API Keys, Auth Mechanisms)"
+	"Cloud Services
+(AWS IoT, Firebase)" [label="Cloud Services
+(AWS IoT, Firebase)" shape=box]
+	"Data Processing & Storage Layer" -> "Cloud Services
+(AWS IoT, Firebase)"
+	"IoT Platform
+(ThingSpeak, Adafruit IO)" [label="IoT Platform
+(ThingSpeak, Adafruit IO)" shape=box]
+	"Data Processing & Storage Layer" -> "IoT Platform
+(ThingSpeak, Adafruit IO)"
+	"Database
+(SQL/NoSQL, Excel, Export)" [label="Database
+(SQL/NoSQL, Excel, Export)" shape=box]
+	"Data Processing & Storage Layer" -> "Database
+(SQL/NoSQL, Excel, Export)"
+	"Mobile Application
+(Android Studio, Kotlin, Java)" [label="Mobile Application
+(Android Studio, Kotlin, Java)" shape=box]
+	"Visualization & User Interface Layer" -> "Mobile Application
+(Android Studio, Kotlin, Java)"
+	"Web Dashboard
+(Grafana, Custom Web Interface)" [label="Web Dashboard
+(Grafana, Custom Web Interface)" shape=box]
+	"Visualization & User Interface Layer" -> "Web Dashboard
+(Grafana, Custom Web Interface)"
+	"Data Analysis
+(Matplotlib, Python)" [label="Data Analysis
+(Matplotlib, Python)" shape=box]
+	"Visualization & User Interface Layer" -> "Data Analysis
+(Matplotlib, Python)"
+	"Development Tools
+(VS Code, Arduino IDE, PlatformIO, GitHub, Eclipse IDE)" [label="Development Tools
+(VS Code, Arduino IDE, PlatformIO, GitHub, Eclipse IDE)" shape=box]
+	"Development & Maintenance" -> "Development Tools
+(VS Code, Arduino IDE, PlatformIO, GitHub, Eclipse IDE)"
+}

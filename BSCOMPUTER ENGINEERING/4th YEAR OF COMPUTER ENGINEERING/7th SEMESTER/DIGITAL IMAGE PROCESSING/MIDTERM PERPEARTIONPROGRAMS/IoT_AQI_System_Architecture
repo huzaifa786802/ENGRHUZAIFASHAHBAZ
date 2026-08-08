@@ -1,0 +1,41 @@
+digraph "IOT-BASED_AIR_QUALITY_INDEX_METER_SYSTEM" {
+	fontcolor=black fontsize=16 label="IoT-based Air Quality Index Meter System Architecture"
+	node [fillcolor=lightgreen shape=box style=filled]
+	B [label="Data Collection Layer (Hardware)"]
+	B1 [label="Sensor Nodes: ESP32/ESP8266, MQ-135, MQ-5, PM2.5, PM10"]
+	B2 [label="Power Management: Battery Pack, Power Adapter, Charger Setup"]
+	B3 [label="Hardware Enclosure: Weatherproof Housing, Breadboard, Connecting Wires"]
+	B -> B1
+	B -> B2
+	B -> B3
+	node [fillcolor=lightblue shape=box style=filled]
+	C [label="Connectivity Layer"]
+	C1 [label="Communication Protocols: MQTT, HTTP/HTTPS, Web API"]
+	C2 [label="Authentication: API Keys, Auth Mechanisms"]
+	C -> C1
+	C -> C2
+	node [fillcolor=lightcoral shape=box style=filled]
+	D [label="Data Processing & Storage Layer"]
+	D1 [label="Cloud Services: AWS IoT, Firebase"]
+	D2 [label="IoT Platform: ThingSpeak, Adafruit IO"]
+	D3 [label="Database: SQL Database, Excel Export"]
+	D -> D1
+	D -> D2
+	D -> D3
+	node [fillcolor=khaki shape=box style=filled]
+	E [label="Visualization & User Interface Layer"]
+	E1 [label="Mobile Application: Android Studio, Blynk App"]
+	E2 [label="Web Dashboard: Grafana, Custom Web Interface"]
+	E3 [label="Data Analysis: MATLAB, Python"]
+	E -> E1
+	E -> E2
+	E -> E3
+	node [fillcolor=gray shape=box style=filled]
+	F [label="Development & Maintenance"]
+	F1 [label="Tools Used: VS Code, Arduino IDE, PlatformIO, GitHub, Eclipse IDE"]
+	F -> F1
+	B -> C
+	C -> D
+	D -> E
+	E -> F
+}
