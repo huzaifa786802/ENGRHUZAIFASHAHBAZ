@@ -1,0 +1,5 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/BSCOMPUTER ENGINEERING/3rd YEAR OF COMPUTER ENGINEERING/6th SEMESTER/DIGITAL SYSTEM DESIGN/PROJECTS OF DIGITAL SYSTEM DESGIN/PROJECT CODES OF DIGITAL SYSTEM DESGIN/trafficcontrolsystem/trafficcontrolsystem.srcs/sim_1/new/tbtrafficlightcontroller.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tbtrafficlightcontroller
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/BSCOMPUTER ENGINEERING/3rd YEAR OF COMPUTER ENGINEERING/6th SEMESTER/DIGITAL SYSTEM DESIGN/PROJECTS OF DIGITAL SYSTEM DESGIN/PROJECT CODES OF DIGITAL SYSTEM DESGIN/trafficcontrolsystem/trafficcontrolsystem.sim/sim_1/behav/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+ERROR: [XSIM 43-3340] Unable to create directory boost::filesystem::create_directory: The filename or extension is too long: "xsim.dir/xil_defaultlib".
