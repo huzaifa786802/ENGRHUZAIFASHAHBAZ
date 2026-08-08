@@ -1,0 +1,16 @@
+clear all;
+close all;
+clc;
+
+I = imread('pout.tif');
+figure;
+imshow(I);title('Original');
+figure;
+histogram(I);title('Original Hist');
+
+I_equ = histeq(I);
+
+figure;
+imshow(I_equ,[]);title('Contrast streching using Histrogram');
+figure;
+histogram(I_equ);title('Contrast streching using Histrogram');

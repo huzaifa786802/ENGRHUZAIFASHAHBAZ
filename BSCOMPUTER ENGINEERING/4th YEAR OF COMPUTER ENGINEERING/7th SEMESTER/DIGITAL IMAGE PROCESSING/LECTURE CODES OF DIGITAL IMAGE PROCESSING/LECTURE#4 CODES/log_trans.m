@@ -1,0 +1,13 @@
+clear all;
+close all;
+clc;
+
+I = imread('cameraman.tif');
+figure;
+imshow(I);title('Original');
+
+c = 10;
+
+I_log = c * (log(1 + cast(I,'double')));
+figure;
+imshow(I_log,[]);title('Log Transformation');
