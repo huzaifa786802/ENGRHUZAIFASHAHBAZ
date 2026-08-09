@@ -1,0 +1,6 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/ALL PROGRAMMING LANGUAGES/VERLIOG/16X1MULTIPLIEXER1/16X1MULTIPLIEXER1.srcs/sim_1/new/multiplexertesbench.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module multiplexertesbench
+ERROR: [VRFC 10-1412] syntax error near = [D:/ALL PROGRAMMING LANGUAGES/VERLIOG/16X1MULTIPLIEXER1/16X1MULTIPLIEXER1.srcs/sim_1/new/multiplexertesbench.v:35]
+ERROR: [VRFC 10-1412] syntax error near ; [D:/ALL PROGRAMMING LANGUAGES/VERLIOG/16X1MULTIPLIEXER1/16X1MULTIPLIEXER1.srcs/sim_1/new/multiplexertesbench.v:39]
+ERROR: [VRFC 10-1412] syntax error near ; [D:/ALL PROGRAMMING LANGUAGES/VERLIOG/16X1MULTIPLIEXER1/16X1MULTIPLIEXER1.srcs/sim_1/new/multiplexertesbench.v:41]
+ERROR: [VRFC 10-1040] module multiplexertesbench ignored due to previous errors [D:/ALL PROGRAMMING LANGUAGES/VERLIOG/16X1MULTIPLIEXER1/16X1MULTIPLIEXER1.srcs/sim_1/new/multiplexertesbench.v:23]
