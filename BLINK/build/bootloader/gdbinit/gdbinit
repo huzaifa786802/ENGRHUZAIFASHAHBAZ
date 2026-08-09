@@ -1,0 +1,2 @@
+source D:/BLINK/build/bootloader/gdbinit/symbols
+source D:/BLINK/build/bootloader/gdbinit/connect
