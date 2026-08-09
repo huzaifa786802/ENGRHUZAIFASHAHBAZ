@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+D:/BLINKCHECK/build/CMakeFiles/bootloader
+D:/BLINKCHECK/build/CMakeFiles/bootloader.rule
+D:/BLINKCHECK/build/CMakeFiles/bootloader-complete.rule
+D:/BLINKCHECK/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/BLINKCHECK/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/BLINKCHECK/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/BLINKCHECK/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/BLINKCHECK/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/BLINKCHECK/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/BLINKCHECK/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

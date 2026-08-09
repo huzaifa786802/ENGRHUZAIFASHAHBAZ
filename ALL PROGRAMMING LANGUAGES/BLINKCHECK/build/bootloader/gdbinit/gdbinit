@@ -1,0 +1,2 @@
+source D:/BLINKCHECK/build/bootloader/gdbinit/symbols
+source D:/BLINKCHECK/build/bootloader/gdbinit/connect
