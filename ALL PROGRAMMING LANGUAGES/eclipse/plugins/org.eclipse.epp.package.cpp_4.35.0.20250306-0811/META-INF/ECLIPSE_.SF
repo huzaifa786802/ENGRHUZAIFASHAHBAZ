@@ -1,0 +1,73 @@
+Signature-Version: 1.0
+Created-By: 11.0.24 (Eclipse Adoptium)
+SHA-256-Digest-Manifest: PsAWD8S8GBV/OhNLvxNczerEthzMvvrJXaVaEP6reIY=
+SHA-256-Digest-Manifest-Main-Attributes: ZCzLWmQnN/zbLMO/5vTEUDnl7NQmrP9
+ r4E1eLp7esT8=
+
+Name: about.properties
+SHA-256-Digest: ndQW1odjxGYRRThekY7mqaNuAwM9sS11O+UtymIn4No=
+
+Name: plugin_customization.ini
+SHA-256-Digest: TSxJJBf9jak4zZ+6NsBUuHauZ3Kpi7ElCw4f11Mp5vg=
+
+Name: about.html
+SHA-256-Digest: CLPBwuGGd87ncwFcy1yuXHxb4IoVLHBzrlP8ReflHc0=
+
+Name: plugin.xml
+SHA-256-Digest: ZGULQQlt5EHi56Pw+jtBwGWJR5R/3TIgTlWRAd20wh0=
+
+Name: epp32.png
+SHA-256-Digest: yW7qWOPZTuLaAgqXcN7Al3MaGqhQQ0Gh1SChOnKMzcM=
+
+Name: eclipse32@2x.png
+SHA-256-Digest: ZcJT80Sko8UpLtEaqiOQ7obUwCfVTORacFlJtiZ3sHc=
+
+Name: eclipse48@2x.png
+SHA-256-Digest: 6Lrx8usKqpjJJLwSMWbrzRvF1XivZ8OCHm0i2r9FOyQ=
+
+Name: eclipse32.png
+SHA-256-Digest: tzsiT4zo2LDTEu1rWyuz7r4lDumDliidgr+5nbjnNwc=
+
+Name: about.mappings
+SHA-256-Digest: eUFaRXRsnonGqUXFDXtPCLU5lxj579I6FYDji6HwMZ0=
+
+Name: org.eclipse.ui.intro.universal.solstice/intro-eclipse.svg
+SHA-256-Digest: Xa/1SuIS1rBk5beaZV82czskxgXJGuhTFf3Kj+Bc2PM=
+
+Name: eclipse256@2x.png
+SHA-256-Digest: Qrei5uKg0caBv56H1Il135NHKDRrzTOGW3yZcOY2FPY=
+
+Name: eclipse_lg.png
+SHA-256-Digest: AwBkFjH7C+79jv/ftrH+3Z66LHdtifLiWtCgpa/s80k=
+
+Name: eclipse48.png
+SHA-256-Digest: +kK7mXUUwF+raDMuDr4UKiAlejLMDr1UC0nJjraXilg=
+
+Name: eclipse_lg@2x.png
+SHA-256-Digest: Jriazc8exeJmM1Jr3foqZFZweX9fB6nIjJcdJSk9mfY=
+
+Name: about.ini
+SHA-256-Digest: e+dvw9J+1XNY8zXDGm/t/Qqwbu4BGk3r90JkLu636/8=
+
+Name: intro-eclipse.svg
+SHA-256-Digest: QP/Y7dAN3AUPOE4Dtgt816Z/chpK4Ncf81M0yaSEdCg=
+
+Name: plugin.properties
+SHA-256-Digest: LPDRhD9n3jkANzK68ESrL/j3XoeK3zo+TJYkhPAIVAk=
+
+Name: META-INF/maven/org.eclipse.epp/org.eclipse.epp.package.cpp/pom.xml
+SHA-256-Digest: b3jEZU9NYcFWxGuHwzqr89+3A1CheZ3dqgUoG3HqjsE=
+
+Name: eclipse16@2x.png
+SHA-256-Digest: j3LbmUvpf6nVmbIvByKYugihlCl5WJYLzXTNBDQofDs=
+
+Name: eclipse16.png
+SHA-256-Digest: n4w1sDrng2suD8QmhiSdPVYvw6CERWEkj/B1FbTUat8=
+
+Name: eclipse256.png
+SHA-256-Digest: R2Y26E+mRAx1ijRzZILdvqFTkeaOjKCw+3W+BfJXobk=
+
+Name: META-INF/maven/org.eclipse.epp/org.eclipse.epp.package.cpp/pom.pro
+ perties
+SHA-256-Digest: BKcQBDHk5rlofGWFoNxjoM6rdBZowbJ0Vu3oOxYzVVI=
+
