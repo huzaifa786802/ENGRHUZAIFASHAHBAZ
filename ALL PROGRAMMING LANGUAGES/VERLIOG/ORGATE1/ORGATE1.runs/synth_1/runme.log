@@ -1,0 +1,4 @@
+
+*** Running vivado
+    with args -log orgate.vds -m64 -mode batch -messageDb vivado.pb -notrace -source orgate.tcl
+

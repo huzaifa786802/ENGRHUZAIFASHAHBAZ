@@ -1,0 +1,6 @@
+Vivado Simulator 2015.4
+Time resolution is 1 ps
+Non-overlapping case:
+
+Overlapping case:
+$finish called at time : 410 ns : File "D:/ALL PROGRAMMING LANGUAGES/VERLIOG/sequence_detector/sequence_detector.srcs/sim_1/new/sequence_detector_tb.v" Line 98
