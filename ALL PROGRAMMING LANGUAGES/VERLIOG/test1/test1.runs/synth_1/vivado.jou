@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2015.4 (64-bit)
+# SW Build 1412921 on Wed Nov 18 09:43:45 MST 2015
+# IP Build 1412160 on Tue Nov 17 13:47:24 MST 2015
+# Start of session at: Thu Mar 14 09:21:06 2024
+# Process ID: 1520
+# Current directory: D:/ALL PROGRAMMING LANGUAGES/VERLIOG/test1/test1.runs/synth_1
+# Command line: vivado.exe -log test1.vds -mode batch -messageDb vivado.pb -notrace -source test1.tcl
+# Log file: D:/ALL PROGRAMMING LANGUAGES/VERLIOG/test1/test1.runs/synth_1/test1.vds
+# Journal file: D:/ALL PROGRAMMING LANGUAGES/VERLIOG/test1/test1.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source test1.tcl -notrace

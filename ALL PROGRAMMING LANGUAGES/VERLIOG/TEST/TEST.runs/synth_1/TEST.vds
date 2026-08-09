@@ -1,0 +1,18 @@
+#-----------------------------------------------------------
+# Vivado v2015.4 (64-bit)
+# SW Build 1412921 on Wed Nov 18 09:43:45 MST 2015
+# IP Build 1412160 on Tue Nov 17 13:47:24 MST 2015
+# Start of session at: Thu Mar 14 09:14:09 2024
+# Process ID: 18760
+# Current directory: D:/ALL PROGRAMMING LANGUAGES/VERLIOG/TEST/TEST.runs/synth_1
+# Command line: vivado.exe -log TEST.vds -mode batch -messageDb vivado.pb -notrace -source TEST.tcl
+# Log file: D:/ALL PROGRAMMING LANGUAGES/VERLIOG/TEST/TEST.runs/synth_1/TEST.vds
+# Journal file: D:/ALL PROGRAMMING LANGUAGES/VERLIOG/TEST/TEST.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source TEST.tcl -notrace
+WARNING: [Board 49-26] cannot add Board Part digilentinc.com:arty-s7-25:part0:1.0 available at D:/Vivado/Vivado/2015.4/data/boards/board_files/arty-s7-25/E.0/board.xml as part xc7s25csga324-1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part digilentinc.com:arty-s7-50:part0:1.0 available at D:/Vivado/Vivado/2015.4/data/boards/board_files/arty-s7-50/B.0/board.xml as part xc7s50csga324-1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part digilentinc.com:cmod-s7-25:part0:1.0 available at D:/Vivado/Vivado/2015.4/data/boards/board_files/cmod-s7-25/B.0/board.xml as part xc7s25csga225-1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part digilentinc.com:cora-z7-07s:part0:1.0 available at D:/Vivado/Vivado/2015.4/data/boards/board_files/cora-z7-07s/B.0/board.xml as part xc7z007sclg400-1 specified in board_part file is either invalid or not available
+ERROR: [Common 17-275] File does not exist [D:/downloads/Zybo-Master.xdc]
+INFO: [Common 17-206] Exiting Vivado at Thu Mar 14 09:14:14 2024...
