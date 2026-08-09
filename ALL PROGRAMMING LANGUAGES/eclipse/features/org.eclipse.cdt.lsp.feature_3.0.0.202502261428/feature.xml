@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2023, 2025 ArSysOp
+
+   This program and the accompanying materials
+   are made available under the terms of the Eclipse Public License 2.0
+   which accompanies this distribution, and is available at
+   https://www.eclipse.org/legal/epl-2.0/
+
+   SPDX-License-Identifier: EPL-2.0
+-->
+<feature
+      id="org.eclipse.cdt.lsp.feature"
+      label="%featureName"
+      version="3.0.0.202502261428"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.tm4e.feature"/>
+      <import feature="org.eclipse.tm4e.language_pack.feature"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.cdt.lsp"
+         version="3.0.0.202502261428"/>
+
+   <plugin
+         id="org.eclipse.cdt.lsp.clangd"
+         version="3.0.0.202502261428"/>
+
+   <plugin
+         id="org.eclipse.cdt.lsp.doc"
+         version="3.0.0.202502261428"/>
+
+</feature>
