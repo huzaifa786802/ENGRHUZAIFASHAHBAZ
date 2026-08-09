@@ -1,0 +1,13 @@
+Vivado Simulator 2015.4
+Copyright 1986-1999, 2001-2015 Xilinx, Inc. All Rights Reserved.
+Running: D:/Vivado/Vivado/2015.4/bin/unwrapped/win64.o/xelab.exe -wto 0a791b0bce3d4c89a49e2a275dfdefaa --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot comptb_behav xil_defaultlib.comptb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.complement
+Compiling module xil_defaultlib.comptb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot comptb_behav
